@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Akshithreddy Sheri — Computer Science</title>
+<meta name="description" content="Akshithreddy Sheri — Cybersecurity and software engineering. Computer Science student at Texas A&amp;M, hoping to add a Cybersecurity minor.">
+<meta property="og:title" content="Akshithreddy Sheri — Computer Science">
+<meta property="og:description" content="Cybersecurity and software engineering. Computer Science student at Texas A&amp;M, hoping to add a Cybersecurity minor.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arsheri.vercel.app">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Akshithreddy Sheri — portfolio
+   Design note: the visual language is borrowed from email
+   authentication headers (Authentication-Results, key: value
+   pairs, pass/fail verdicts) because that is literally the
+   subject matter of the flagship project. Type is IBM Plex —
+   Mono carries structure and personality, Sans carries prose.
+   ============================================================ */
+:root{
+  --ink:#0F1620;
+  --ink-2:#3D4C5E;
+  --ink-3:#6B7D91;
+  --paper:#EAEEF3;
+  --card:#FFFFFF;
+  --rule:#CBD5E0;
+  --rule-2:#E2E8EF;
+  --pass:#0B6E51;
+  --pass-bg:#E4F1EC;
+  --fail:#A62B23;
+  --link:#1B44C4;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --sans:'IBM Plex Sans',ui-sans-serif,-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 28px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(234,238,243,.88);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar-in{
+  max-width:940px;margin:0 auto;padding:13px 28px;
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.wordmark{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:-.01em}
+.wordmark span{color:var(--ink-3);font-weight:400}
+.navlinks{display:flex;gap:20px;font-family:var(--mono);font-size:12.5px}
+.navlinks a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px}
+.navlinks a:hover{color:var(--link);border-bottom-color:var(--link)}
+.navlinks a:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+
+/* ---------- hero ---------- */
+.hero{padding:78px 0 12px}
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:26px;
+}
+.thesis{
+  font-family:var(--mono);
+  font-size:clamp(26px,4.6vw,44px);
+  line-height:1.24;
+  font-weight:500;
+  letter-spacing:-.028em;
+  max-width:22ch;
+  margin-bottom:14px;
+}
+.thesis em{font-style:normal;color:var(--pass);white-space:nowrap}
+.thesis-sub{
+  font-size:16.5px;color:var(--ink-2);max-width:66ch;margin-bottom:40px;
+}
+
+/* ---------- signature: auth-results block ---------- */
+.authblock{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  font-family:var(--mono);
+  font-size:13px;
+  overflow:hidden;
+  box-shadow:0 1px 2px rgba(15,22,32,.05),0 8px 26px -14px rgba(15,22,32,.22);
+}
+.auth-head{
+  padding:9px 16px;border-bottom:1px solid var(--rule-2);
+  color:var(--ink-3);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.auth-body{padding:14px 16px 16px}
+.auth-row{
+  display:grid;grid-template-columns:152px 1fr;gap:16px;
+  padding:6px 0;align-items:baseline;
+}
+.auth-key{color:var(--ink-2);white-space:nowrap}
+.verdict{
+  display:inline-block;min-width:44px;
+  color:var(--pass);font-weight:600;
+}
+.verdict.pending{color:var(--ink-3);font-weight:400}
+.auth-val{color:var(--ink);font-family:var(--sans);font-size:14.5px}
+.auth-foot{
+  border-top:1px solid var(--rule-2);padding:10px 16px;
+  font-size:11.5px;color:var(--ink-3);
+}
+
+/* ---------- sections ---------- */
+section{padding:66px 0 0}
+.sect-label{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);
+  padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:34px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+}
+.sect-label span{color:var(--ink-3);letter-spacing:.04em;text-transform:none;font-size:11.5px}
+
+/* ---------- projects ---------- */
+.project{padding-bottom:52px;margin-bottom:52px;border-bottom:1px solid var(--rule)}
+.project:last-child{border-bottom:none;margin-bottom:0;padding-bottom:14px}
+.proj-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.proj-top-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.proj-name{font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:-.02em}
+.proj-meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.04em}
+.repo-link{
+  font-family:var(--mono);font-size:11.5px;text-decoration:none;color:var(--link);
+  border:1px solid var(--rule);border-radius:2px;padding:4px 10px;
+  transition:border-color .15s,background .15s;white-space:nowrap;
+}
+.repo-link:hover{border-color:var(--link);background:rgba(27,68,196,.06)}
+.repo-link:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.repo-link::before{content:"→ ";color:var(--ink-3)}
+.status-pill{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--pass);
+  background:var(--pass-bg);border:1px solid rgba(11,110,81,.25);border-radius:2px;padding:4px 10px;
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+}
+.status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pass)}
+.proj-line{font-size:16.5px;color:var(--ink-2);max-width:62ch;margin-bottom:18px}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-2);
+  border:1px solid var(--rule);border-radius:2px;padding:3px 8px;background:var(--card);
+}
+.writeup p{max-width:66ch;margin-bottom:15px;color:var(--ink)}
+.writeup p:last-child{margin-bottom:0}
+
+/* the decision callout — the interview-gold moment per project */
+.decision{
+  background:var(--card);border:1px solid var(--rule);
+  border-left:3px solid var(--pass);
+  border-radius:2px;padding:18px 20px;margin:24px 0 4px;max-width:66ch;
+}
+.decision-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pass);margin-bottom:8px;
+}
+.decision p{margin:0;font-size:15.5px;color:var(--ink)}
+
+
+/* video walkthrough */
+.demo{margin:26px 0 4px;max-width:66ch}
+.demo-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:10px;
+}
+.demo-frame{
+  position:relative;width:100%;padding-top:56.25%;   /* 16:9 without layout shift */
+  background:#000;border:1px solid var(--rule);border-radius:3px;overflow:hidden;
+}
+.demo-frame iframe{
+  position:absolute;top:0;left:0;width:100%;height:100%;border:0;
+}
+.demo-note{font-size:12.5px;color:var(--ink-3);margin-top:9px;line-height:1.5}
+
+/* ---------- experience ---------- */
+.role{padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid var(--rule-2)}
+.role:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.role-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.role-title{font-family:var(--mono);font-size:16px;font-weight:600;letter-spacing:-.01em}
+.role-when{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.role-org{font-size:14.5px;color:var(--ink-3);margin-bottom:10px}
+.role ul{list-style:none;max-width:66ch}
+.role li{position:relative;padding-left:17px;margin-bottom:7px;color:var(--ink-2);font-size:15.5px}
+.role li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:1px;background:var(--ink-3);
+}
+
+/* ---------- credentials grid ---------- */
+.cred{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:34px 40px}
+@media(max-width:420px){.cred{grid-template-columns:1fr}}
+.cred-col h3{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;margin-bottom:12px;
+}
+.cred-col ul{list-style:none}
+.cred-col li{
+  font-size:15px;color:var(--ink-2);padding:6px 0;border-bottom:1px solid var(--rule-2);
+}
+.cred-col li:last-child{border-bottom:none}
+.cred-col li b{color:var(--ink);font-weight:600}
+.kv{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);display:block;margin-top:2px}
+
+
+/* ---------- documents ---------- */
+.docs{margin-top:34px;padding-top:24px;border-top:1px solid var(--rule-2)}
+.docs-label{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;
+}
+.docs-row{display:flex;gap:14px;flex-wrap:wrap}
+.doc{
+  background:var(--card);border:1px solid var(--rule);border-radius:3px;
+  padding:0;cursor:zoom-in;overflow:hidden;width:190px;text-align:left;
+  transition:border-color .18s,transform .18s,box-shadow .18s;font-family:inherit;
+}
+.doc:hover{border-color:var(--link);transform:translateY(-2px);
+  box-shadow:0 6px 20px -10px rgba(15,22,32,.35)}
+.doc:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+.doc img{
+  display:block;width:100%;height:128px;object-fit:cover;object-position:top center;
+  border-bottom:1px solid var(--rule-2);background:#fff;
+}
+.doc-cap{
+  display:block;padding:9px 11px;font-family:var(--mono);font-size:11px;color:var(--ink);
+  line-height:1.4;
+}
+.doc-cap i{display:block;font-style:normal;color:var(--ink-3);font-size:10px;margin-top:3px}
+
+/* lightbox */
+.lb{
+  position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:36px 20px;
+  background:rgba(15,22,32,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  cursor:zoom-out;
+}
+.lb.open{display:grid}
+.lb-inner{max-width:min(940px,92vw);margin:0;text-align:center}
+.lb-inner img{
+  max-width:100%;max-height:78vh;display:block;margin:0 auto;
+  border:1px solid var(--rule);border-radius:3px;background:#fff;
+}
+.lb-inner figcaption{
+  font-family:var(--mono);font-size:12px;color:#cfdae6;margin-top:14px;line-height:1.5;
+}
+.lb-close{
+  position:absolute;top:18px;right:22px;background:none;border:none;color:#cfdae6;
+  font-size:34px;line-height:1;cursor:pointer;padding:4px 10px;border-radius:4px;
+}
+.lb-close:hover{color:#fff}
+.lb-close:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+@media(max-width:520px){ .doc{width:100%} }
+
+/* ---------- contact ---------- */
+.contact{padding:66px 0 90px}
+.contact-line{
+  font-family:var(--mono);font-size:clamp(19px,3vw,28px);font-weight:500;
+  letter-spacing:-.02em;margin-bottom:22px;
+}
+.contact-links{display:flex;flex-wrap:wrap;gap:10px}
+.clink{
+  font-family:var(--mono);font-size:13.5px;text-decoration:none;color:var(--ink);
+  background:var(--card);border:1px solid var(--rule);border-radius:2px;
+  padding:9px 15px;transition:border-color .15s,color .15s,transform .15s;
+}
+.clink:hover{border-color:var(--link);color:var(--link);transform:translateY(-1px)}
+.clink:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+footer{border-top:1px solid var(--rule);padding:20px 0 40px}
+.foot-in{
+  max-width:940px;margin:0 auto;padding:0 28px;
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+
+
+/* ---------- forecast console (ADSC x American Airlines) ---------- */
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pass);margin-right:8px;vertical-align:1px;box-shadow:0 0 0 0 rgba(11,110,81,.5);animation:livepulse 2.2s infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(11,110,81,.45)}70%{box-shadow:0 0 0 7px rgba(11,110,81,0)}100%{box-shadow:0 0 0 0 rgba(11,110,81,0)}}
+
+
+/* ---------- v5: about, photo, dark mode, try-it labs ---------- */
+:root[data-theme="dark"]{
+  --ink:#E6EDF5;--ink-2:#B4C2D2;--ink-3:#8597AB;--paper:#0E141B;--card:#151E28;
+  --rule:#2A3746;--rule-2:#1F2A36;--pass:#3CCB95;--pass-bg:#12302A;--fail:#FF7A70;--link:#8AA8FF;
+}
+:root[data-theme="dark"] .topbar{background:rgba(14,20,27,.86)}
+:root[data-theme="dark"] .repo-link:hover{background:rgba(138,168,255,.08)}
+:root[data-theme="dark"] .status-pill{border-color:rgba(60,203,149,.3)}
+body{transition:background .25s,color .25s}
+.theme-btn{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:4px 10px;cursor:pointer}
+.theme-btn:hover{border-color:var(--link);color:var(--link)}
+.theme-btn::before{content:"◐ "}
+
+.hero-grid{display:grid;grid-template-columns:1fr 150px;gap:36px;align-items:center}
+.hero-photo{margin:0 0 30px}
+.hero-photo img{display:block;width:150px;height:188px;object-fit:cover;border:1px solid var(--rule);border-radius:3px;
+  box-shadow:0 1px 2px rgba(15,22,32,.05),0 8px 26px -14px rgba(15,22,32,.3);transition:transform .25s}
+.hero-photo img:hover{transform:translateY(-3px) rotate(-1deg)}
+.caret{display:inline-block;width:.55ch;height:.92em;background:var(--pass);margin-left:.12em;vertical-align:-.1em;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.about p{max-width:66ch;margin-bottom:14px;font-size:16.5px;color:var(--ink)}
+.about p:last-child{margin-bottom:0}
+
+.lab{background:var(--card);border:1px solid var(--rule);border-radius:3px;font-family:var(--mono);font-size:13px;max-width:66ch;margin:0 0 24px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(15,22,32,.05),0 8px 26px -16px rgba(15,22,32,.22)}
+.lab-head{padding:8px 14px;border-bottom:1px solid var(--rule-2);color:var(--ink-3);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lab-body{padding:14px}
+.lab-k{color:var(--ink-3);font-size:11.5px}
+label.lab-k{display:block;margin-bottom:6px}
+.lab textarea{width:100%;min-height:70px;font:13px/1.5 var(--mono);color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:2px;padding:9px 10px;resize:vertical}
+.lab textarea:focus{outline:2px solid var(--link);outline-offset:1px}
+.lab textarea[readonly]{color:var(--ink-3)}
+.lab-meter{position:relative;height:8px;background:var(--paper);border:1px solid var(--rule);border-radius:2px;margin:14px 0 6px}
+.lab-meter .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--pass);transition:width .5s cubic-bezier(.2,.7,.2,1),background .3s}
+.lab-meter .fill.hot{background:var(--fail)}
+.lab-meter .mk{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--ink-3)}
+.lab-meter .mk.hot{background:var(--fail)}
+.lab-scale{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-3);margin-bottom:10px}
+.lab-out{color:var(--ink-2);line-height:1.6}
+.lab-out b{color:var(--ink)}
+.sec-list{list-style:none;margin:8px 0 0;padding:0;font:12.5px/1.55 var(--mono)}
+.sec-list li{padding:6px 0;border-top:1px dashed var(--rule);color:var(--ink-2)}
+.sec-list li b{color:var(--fail)}
+.sec-list li .m{color:var(--ink-3)}
+.lab-out .verdict.bad{color:var(--fail)}
+.lab-out span{font-family:var(--sans);font-size:13.5px;color:var(--ink-3)}
+.lab-btns{display:flex;gap:8px;margin-top:12px}
+.lab-btns button,.vtog{font-family:var(--mono);font-size:12px;cursor:pointer;border-radius:2px;transition:transform .12s,background .15s,color .15s,border-color .15s}
+.lab-btns button{color:#fff;background:var(--pass);border:1px solid var(--pass);padding:6px 12px}
+:root[data-theme="dark"] .lab-btns button{color:#0E141B}
+:root[data-theme="dark"] .lab-btns button.ghost{color:var(--ink-2)}
+.lab-btns button.ghost{background:transparent;color:var(--ink-2);border-color:var(--rule)}
+.lab-btns button:active,.vtog:active{transform:scale(.95)}
+.mail-hdr{font-size:12.5px;color:var(--ink);margin-bottom:10px;line-height:1.7}
+.mail-rows{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--ink-2)}
+.vtog{font-weight:600;padding:1px 7px;border:1px dashed var(--rule);background:transparent;color:var(--pass)}
+.vtog:hover{border-style:solid;border-color:currentColor}
+.vtog.bad{color:var(--fail)}
+
+.copy{cursor:pointer}
+.copy::before{content:"⧉ ";color:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);opacity:0;z-index:95;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:12.5px;padding:9px 14px;border-radius:3px;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:640px){
+  .hero-grid{grid-template-columns:1fr;gap:0}
+  .hero-photo{grid-row:1;margin-bottom:22px}
+  .hero-photo img{width:112px;height:140px}
+  .wordmark{flex:1;white-space:nowrap}
+}
+@media(max-width:420px){
+  .wordmark span{display:none}
+  .theme-btn{order:2}
+  .navlinks{order:3;width:100%}
+}
+@media(prefers-reduced-motion:reduce){.caret{animation:none}}
+
+/* ---------- v7: meal planner lab, re-run, quick jump, back to top ---------- */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.pick .vtog{color:var(--ink-2);font-weight:500}
+.pick .vtog[aria-pressed="true"]{color:#fff;background:var(--pass);border-color:var(--pass);border-style:solid}
+#allergyPick .vtog[aria-pressed="true"]{background:var(--fail);border-color:var(--fail)}
+:root[data-theme="dark"] .pick .vtog[aria-pressed="true"]{color:#0E141B}
+.meal-list{list-style:none;margin:14px 0 8px;padding:0;counter-reset:m}
+.meal-list li{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--rule-2);font-size:12.5px;transition:opacity .25s}
+.meal-list li:last-child{border-bottom:0}
+.meal-list li .nm{color:var(--ink)}
+.meal-list li .nm::before{counter-increment:m;content:counter(m) ". ";color:var(--ink-3)}
+.meal-list li .tg{color:var(--ink-3);text-align:right}
+.meal-list li.out{opacity:.5}
+.meal-list li.out .nm{text-decoration:line-through;color:var(--ink-3)}
+.meal-list li.out .nm::before{content:"✕ ";color:var(--fail)}
+.meal-list li.out .tg{color:var(--fail)}
+.meal-list li.moved{animation:bump .5s}
+@keyframes bump{30%{background:var(--pass-bg)}}
+.auth-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.rerun{font-family:var(--mono);font-size:11px;color:var(--link);background:none;border:1px solid var(--rule);border-radius:2px;padding:3px 9px;cursor:pointer}
+.rerun:hover{border-color:var(--link)}
+.jump-btn::before{content:""}
+.totop{position:fixed;right:22px;bottom:22px;z-index:60;width:40px;height:40px;border-radius:3px;border:1px solid var(--rule);background:var(--card);color:var(--ink);
+  font-family:var(--mono);font-size:16px;cursor:pointer;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 8px 22px -14px rgba(15,22,32,.4)}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{border-color:var(--link);color:var(--link)}
+.jump{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding:12vh 16px 16px;background:rgba(15,22,32,.45)}
+.jump.open{display:flex}
+.jump-box{width:min(520px,100%);background:var(--card);border:1px solid var(--rule);border-radius:3px;font-family:var(--mono);box-shadow:0 30px 70px -20px rgba(0,0,0,.45);overflow:hidden}
+.jump-head{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--rule-2);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.jump-head kbd{font:inherit;border:1px solid var(--rule);border-radius:2px;padding:1px 6px;text-transform:none;letter-spacing:0}
+#jumpInput{width:100%;border:0;border-bottom:1px solid var(--rule-2);background:transparent;color:var(--ink);font:14px var(--mono);padding:12px 14px;outline:none}
+#jumpList{list-style:none;max-height:46vh;overflow:auto;margin:0;padding:6px}
+#jumpList li{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:2px;font-size:13px;color:var(--ink);cursor:pointer}
+#jumpList li span{color:var(--ink-3);font-size:11px}
+#jumpList li[aria-selected="true"]{background:var(--pass-bg);color:var(--pass)}
+@media(max-width:640px){.jump-btn{display:none}.totop{right:14px;bottom:14px}}
+
+/* ---------- interactive layer (all added by JS; page works without it) ---------- */
+section[id],.project[id],.role[id]{scroll-margin-top:72px}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:30;pointer-events:none}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pass),var(--link));transition:width .08s linear}
+.navlinks a.active{color:var(--ink);border-bottom-color:var(--pass)}
+.auth-row.is-link{cursor:pointer;border-radius:3px;transition:background .18s}
+.auth-row.is-link:hover,.auth-row.is-link:focus-visible{background:var(--pass-bg);outline:none}
+.auth-row.is-link .auth-val::after{content:" →";color:var(--pass);opacity:0;transition:opacity .18s}
+.auth-row.is-link:hover .auth-val::after,.auth-row.is-link:focus-visible .auth-val::after{opacity:1}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:-8px 0 34px}
+.fbtn,.mini-btn{font-family:var(--mono);font-size:12px;letter-spacing:.02em;background:var(--card);color:var(--ink-2);
+  border:1px solid var(--rule);border-radius:999px;padding:6px 14px;cursor:pointer;transition:all .18s}
+.fbtn:hover,.mini-btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fbtn .n{opacity:.6;margin-left:6px}
+.fbtn:focus-visible,.mini-btn:focus-visible,.more-btn:focus-visible,.skill-btn:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.project.filtered-out{display:none}
+.project.fade-in{animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.more-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--link);
+  background:none;border:0;padding:4px 0;cursor:pointer;margin-top:4px}
+.more-btn .chev{display:inline-block;transition:transform .25s}
+.more-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.collapsible{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.collapsible>div{overflow:hidden}
+.collapsible.open{grid-template-rows:1fr}
+.collapsible.open>div{padding-top:18px}
+
+.sect-label .mini-btn{font-size:11px;padding:3px 10px;text-transform:none;letter-spacing:.02em}
+.role li.extra{display:none}
+.role.expanded li.extra{display:list-item;animation:fadeIn .3s ease}
+
+.skill-btn{font:inherit;color:inherit;background:none;border:0;border-bottom:1px dashed var(--ink-3);padding:0;cursor:pointer;transition:color .15s,border-color .15s}
+.skill-btn:hover{color:var(--link);border-bottom-color:var(--link)}
+.skill-btn[aria-pressed="true"]{color:var(--pass);border-bottom:1px solid var(--pass);font-weight:500}
+.used-in{display:none;margin-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:var(--pass-bg);border-radius:3px;padding:7px 10px}
+.used-in.show{display:block;animation:fadeIn .25s ease}
+.used-in a{color:var(--pass);margin-right:10px;text-decoration:none;border-bottom:1px solid currentColor}
+.cred-hint{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin:-2px 0 10px}
+.spot{animation:spot 1.6s ease}
+@keyframes spot{0%{box-shadow:0 0 0 0 rgba(11,110,81,0);background:transparent}25%{box-shadow:0 0 0 8px rgba(11,110,81,.12);background:rgba(228,241,236,.8)}100%{box-shadow:0 0 0 0 rgba(11,110,81,0);background:transparent}}
+@media (prefers-reduced-motion:reduce){.collapsible{transition:none}.spot,.fade-in,.role.expanded li.extra,.used-in.show{animation:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+@media (max-width:560px){
+  .hero{padding-top:52px}
+  .auth-row{grid-template-columns:1fr;gap:2px}
+  .auth-val{font-size:13.5px}
+  .navlinks{gap:14px;font-size:12px}
+}
+</style>
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';
+if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();
+</script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="wordmark">akshithreddy sheri <span>/ computer science</span></div>
+    <nav class="navlinks">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn jump-btn" id="jumpBtn" type="button" aria-label="Jump to a section">/ jump</button>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode">dark</button>
+  </div>
+</div>
+
+<button class="totop" id="toTop" type="button" aria-label="Back to top">↑</button>
+<div class="jump" id="jump" role="dialog" aria-modal="true" aria-label="Jump to a section">
+  <div class="jump-box">
+    <div class="jump-head"><span>jump to</span><kbd>esc</kbd></div>
+    <input id="jumpInput" type="text" placeholder="type a section, project, or role…" autocomplete="off" spellcheck="false" aria-label="Search the page">
+    <ul id="jumpList" role="listbox"></ul>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+<main class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+    <div class="eyebrow">Austin, TX · Texas A&amp;M University</div>
+
+    <h1 class="thesis">Cybersecurity and <em>software engineering</em>.<span class="caret" aria-hidden="true"></span></h1>
+
+    <p class="thesis-sub">Computer Science student at Texas A&amp;M, hoping to add a Cybersecurity minor.</p>
+
+      </div>
+      <figure class="hero-photo"><img src="images/headshot.jpg" alt="Akshithreddy Sheri" onerror="this.closest('figure').remove()"></figure>
+    </div>
+
+    <div class="authblock" id="authblock">
+      <div class="auth-head">
+        <span>Authentication-Results</span>
+        <span>akshithreddysheri</span>
+      </div>
+      <div class="auth-body">
+        <div class="auth-row">
+          <span class="auth-key">education=<span class="verdict pending" data-verdict>····</span></span>
+          <span class="auth-val">B.S. Computer Science, Texas A&amp;M · hoping to add Cybersecurity minor</span>
+        </div>
+        <div class="auth-row">
+          <span class="auth-key">shipped=<span class="verdict pending" data-verdict>····</span></span>
+          <span class="auth-val">Four projects built end to end, one in 48 hours</span>
+        </div>
+        <div class="auth-row">
+          <span class="auth-key">experience=<span class="verdict pending" data-verdict>····</span></span>
+          <span class="auth-val">Student Technician, Provost IT · Team Lead, ADSC &times; American Airlines · Research Lead, HumansRUS · Aggie Collaborate</span>
+        </div>
+        <div class="auth-row">
+          <span class="auth-key">credentials=<span class="verdict pending" data-verdict>····</span></span>
+          <span class="auth-val">GFACT · National Cyber Scholar 2024, top 1% nationally</span>
+        </div>
+      </div>
+      <div class="auth-foot"><span>Every claim on this page is checkable. Links go to the source.</span><button type="button" class="rerun" id="rerun">↻ re-run checks</button></div>
+    </div>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="about">
+    <div class="sect-label">About <span>the short version</span></div>
+    <p>I grew up in Austin and went to Round Rock High School, where competitions like CyberStart America and PicoCTF got me hooked on security. Figuring out how systems break is still the fastest way I know to learn how they work. I also co-founded the Texas chapter of STEM-IST and taught technical lessons to middle schoolers.</p>
+    <p>The summer after my junior year, I worked the IT help desk at Texas Health &amp; Human Services and learned that the best fix is the one that stops the same ticket from coming back. Now I'm studying Computer Science at Texas A&amp;M, working in the Provost IT Office, and building security tools like Canary, Phishing Risk Analyzer, and Credential Leak Scanner that turn messy signals into answers people can trust.</p>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section id="work">
+    <div class="sect-label">Selected work <span>four projects, built end to end</span></div>
+
+    <!-- Credential Leak Scanner -->
+    <article class="project reveal" id="credential-leak-scanner" data-tags="security" data-name="Credential Leak Scanner">
+      <div class="proj-top">
+        <h2 class="proj-name">Credential Leak Scanner</h2>
+        <div class="proj-top-right">
+          <div class="proj-meta">Nov 2026 · personal project · 43 tests</div>
+          <a class="repo-link" href="https://github.com/arsheri07/credential-leak-scanner" target="_blank" rel="noopener">github.com/arsheri07/credential-leak-scanner</a>
+        </div>
+      </div>
+      <p class="proj-line">A command-line tool that catches leaked API keys, tokens, and passwords in code and in git history, before they reach a public repo.</p>
+      <div class="stack">
+        <span class="chip">Python</span><span class="chip">Regex</span><span class="chip">Shannon entropy</span>
+        <span class="chip">Git</span><span class="chip">SARIF</span><span class="chip">GitHub Actions</span><span class="chip">pytest</span>
+      </div>
+      <div class="lab" data-lab="secrets">
+        <div class="lab-head"><span>try it · scan a config file</span><span>credscan --stdin</span></div>
+        <div class="lab-body">
+          <label class="lab-k" for="secText">config.py</label>
+          <textarea id="secText" spellcheck="false" rows="5"></textarea>
+          <div class="lab-out" aria-live="polite">findings=<b id="secCount">0</b> verdict=<b id="secVerdict" class="verdict">pass</b> <span id="secNote"></span></div>
+          <ol class="sec-list" id="secList"></ol>
+          <div class="lab-btns"><button type="button" id="secLeak">leak a key</button><button type="button" id="secPlace" class="ghost">use a placeholder</button><button type="button" id="secReset" class="ghost">reset</button></div>
+        </div>
+      </div>
+      <div class="writeup">
+        <p>Committing a credential is one of the most common ways cloud accounts get compromised, and deleting it in the next commit doesn't help: the key is still in the history for anyone who clones the repo. Credential Leak Scanner checks files, directories, and every line ever added in git history, then reports the file, line, and commit where each secret appeared.</p>
+        <p>It ships 13 detection rules (AWS, GitHub, Slack, Stripe, Google, Anthropic, and OpenAI keys, PEM private keys, JWTs, passwords inside database URLs, and hard-coded <code>password = "..."</code> assignments). Output comes as readable text, JSON, or SARIF, which GitHub code scanning reads directly. Exit codes make it work as a pre-commit hook or a CI gate.</p>
+        <p>Pure Python standard library, no dependencies. 43 pytest tests cover every rule, the false-positive cases, redaction, and a repo where a secret is committed and then deleted. The tests build their fake keys at runtime, so the repo passes its own scan.</p>
+      </div>
+      <div class="decision">
+        <div class="decision-label">The decision</div>
+        <p>Regex alone flags too much: <code>password = "changeme123"</code> matches the same pattern as a real one. So every match also has to clear a Shannon entropy threshold and a placeholder check (<code>example</code>, <code>${VAR}</code>, <code>os.environ</code>). Real keys are random; placeholders aren't. And findings are always redacted to the first and last four characters, because a scanner whose report leaks the secret just moves the leak somewhere else.</p>
+      </div>
+    </article>
+
+    <!-- KitchenSense -->
+    <article class="project reveal" id="kitchensense" data-tags="fullstack ai" data-name="KitchenSense">
+      <div class="proj-top">
+        <h2 class="proj-name">KitchenSense</h2>
+        <div class="proj-top-right">
+          <div class="proj-meta">Aug 2026 · hackathon · 48 hours · solo</div>
+          <a class="repo-link" href="https://github.com/arsheri07/kitchen-sense" target="_blank" rel="noopener">github.com/arsheri07/kitchen-sense</a>
+        </div>
+      </div>
+      <p class="proj-line">Photograph your fridge and pantry; get back a structured inventory and a week of meals planned around what you actually have.</p>
+      <div class="stack">
+        <span class="chip">Node.js</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span>
+        <span class="chip">Claude API</span><span class="chip">S3-compatible storage</span><span class="chip">Zerops</span>
+      </div>
+      <div class="lab" data-lab="meals">
+        <div class="lab-head"><span>try it · plan tonight's dinner</span><span>allergies filter · preferences rank</span></div>
+        <div class="lab-body">
+          <div class="lab-k">allergies (hard filter: removes recipes)</div>
+          <div class="pick" id="allergyPick">
+            <button type="button" class="vtog" data-a="dairy" aria-pressed="false">dairy</button>
+            <button type="button" class="vtog" data-a="gluten" aria-pressed="false">gluten</button>
+            <button type="button" class="vtog" data-a="peanuts" aria-pressed="false">peanuts</button>
+          </div>
+          <div class="lab-k" style="margin-top:10px">preferences (soft rank: reorders only)</div>
+          <div class="pick" id="prefPick">
+            <button type="button" class="vtog" data-p="veg" aria-pressed="false">vegetarian</button>
+            <button type="button" class="vtog" data-p="quick" aria-pressed="false">under 20 min</button>
+            <button type="button" class="vtog" data-p="spicy" aria-pressed="false">spicy</button>
+          </div>
+          <ol class="meal-list" id="mealList" aria-live="polite"></ol>
+          <div class="lab-out" id="mealOut"></div>
+        </div>
+      </div>
+      <div class="writeup">
+        <p>Built solo in 48 hours for The Zerops Challenge, a WeMakeDevs hackathon. The vision layer uses Claude Haiku 4.5 to pull structured inventory data out of ordinary phone photos — the hard part isn't recognizing food, it's turning a cluttered shelf into rows a database can reason about.</p>
+        <p>On top of that sits a recipe-matching and meal-planning engine covering a 38-recipe catalog, with an urgency-aware greedy scheduler that pushes ingredients closest to spoiling into earlier meals.</p>
+        <p>The backend runs as a two-service dev/stage pipeline on Zerops, with database migrations that apply atomically and automatically on every deploy. I drove the whole build-deploy-debug loop through Claude Code and Zerops' control-plane tooling, debugging against live logs rather than clicking through a cloud console.</p>
+      </div>
+      <div class="decision">
+        <div class="decision-label">The decision</div>
+        <p>Dietary preferences are split into a hard filter and a soft rank. Restrictions — allergies, things you can't eat — are enforced absolutely and remove recipes from consideration. Preferences only influence ordering. Collapsing both into one score would have been simpler and occasionally dangerous.</p>
+      </div>
+      <div class="demo">
+        <div class="demo-label">Walkthrough</div>
+        <div class="demo-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/wP5a_lSzNog"
+                  title="KitchenSense — AI-vision kitchen inventory app, 48-hour solo hackathon build"
+                  loading="lazy" allowfullscreen
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <p class="demo-note">The live deployment was retired once the hackathon credit period ended. This walkthrough shows the full flow.</p>
+      </div>
+    </article>
+
+    <!-- Canary -->
+    <article class="project reveal" id="canary" data-tags="security" data-name="Canary">
+      <div class="proj-top">
+        <h2 class="proj-name">Canary</h2>
+        <div class="proj-top-right">
+          <div class="proj-meta">Sep 2026 · personal project · 36 tests</div>
+          <a class="repo-link" href="https://github.com/arsheri07/canary" target="_blank" rel="noopener">github.com/arsheri07/canary</a>
+        </div>
+      </div>
+      <p class="proj-line">A file integrity monitor that tells the difference between you editing a file and ransomware encrypting it.</p>
+      <div class="stack">
+        <span class="chip">Python</span><span class="chip">SHA-256</span><span class="chip">Shannon entropy</span>
+        <span class="chip">Linux</span><span class="chip">CLI</span>
+      </div>
+      <div class="lab" data-lab="entropy">
+        <div class="lab-head"><span>try it · entropy check</span><span>canary --scan</span></div>
+        <div class="lab-body">
+          <label class="lab-k" for="entText">file contents</label>
+          <textarea id="entText" spellcheck="false">Quarterly budget notes: rent is due on the first, payroll runs on the fifteenth, and the new laptops ship next week.</textarea>
+          <div class="lab-meter" aria-hidden="true"><div class="fill"></div><span class="mk" style="left:55%"></span><span class="mk hot" style="left:98.75%"></span></div>
+          <div class="lab-scale" aria-hidden="true"><span>0</span><span>typical text ≈ 4.4</span><span>encrypted ≥ 7.9</span></div>
+          <div class="lab-out" aria-live="polite">entropy=<b id="entNum">0.00</b> verdict=<b id="entVerdict" class="verdict">pass</b> <span id="entNote"></span></div>
+          <div class="lab-btns"><button type="button" id="entEncrypt">encrypt it</button><button type="button" id="entReset" class="ghost">reset</button></div>
+        </div>
+      </div>
+      <div class="writeup">
+        <p>Point it at a folder and it fingerprints every file with SHA-256. Run it again later and it tells you exactly what was added, modified, or deleted. File integrity monitoring is a required control under PCI-DSS 11.5 and CIS Control 3 — Tripwire and OSSEC are the commercial versions of this idea.</p>
+        <p>The harder problem is interpretation. Forty files changing could be a build finishing, or it could be ransomware working through your documents. Six signals contribute to a score, because any one of them has an innocent explanation and almost nothing legitimate produces several at once.</p>
+        <p>Ransomware doesn't announce itself, but it does have to encrypt. That's the property this leans on: encryption is designed to produce output indistinguishable from noise, and noise looks measurably different from English text.</p>
+      </div>
+      <div class="decision">
+        <div class="decision-label">The decision</div>
+        <p>Detection uses Shannon entropy — a measure of how unpredictable a file's bytes are, from 0 to 8. Ordinary text sits around 4.4 because it's full of repeated letters and spaces. Encrypted data sits above 7.9 because every byte value is equally likely. Testing against thirty documents encrypted in place, with no renamed files and no ransom note, entropy moved from 3.80 to 7.85 on every one. Extension and filename matching detect nothing in that case. Entropy still catches it.</p>
+      </div>
+    </article>
+
+    <!-- Phishing Risk Analyzer -->
+    <article class="project reveal" id="scam-shield" data-tags="security fullstack" data-name="Phishing Risk Analyzer">
+      <div class="proj-top">
+        <h2 class="proj-name">Phishing Risk Analyzer</h2>
+        <div class="proj-top-right">
+          <div class="proj-meta">Aug 2026 · personal project · 84 tests</div>
+          <a class="repo-link" href="https://github.com/arsheri07/phishing-risk-analyzer" target="_blank" rel="noopener">github.com/arsheri07/phishing-risk-analyzer</a>
+          <a class="repo-link" href="https://phishing-risk-analyzer-suk0.onrender.com" target="_blank" rel="noopener">live demo</a>
+        </div>
+      </div>
+      <p class="proj-line">One risk-scoring engine that reviews emails, websites, texts, and app listings through real email authentication, not pattern matching.</p>
+      <div class="stack">
+        <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">SPF/DKIM/DMARC</span>
+        <span class="chip">pytest</span>
+      </div>
+      <div class="lab" data-lab="mail">
+        <div class="lab-head"><span>try it · score an email</span><span>click a verdict to flip it</span></div>
+        <div class="lab-body">
+          <div class="mail-hdr"><span class="lab-k">from:</span> <span id="mailFrom">billing@northbank.com</span><br><span class="lab-k">subject:</span> Your statement is ready</div>
+          <div class="mail-rows">
+            <div>spf=<button type="button" class="vtog" data-k="spf" aria-pressed="true">pass</button></div>
+            <div>dkim=<button type="button" class="vtog" data-k="dkim" aria-pressed="true">pass</button></div>
+            <div>dmarc=<button type="button" class="vtog" data-k="dmarc" aria-pressed="true">pass</button></div>
+            <div>lookalike_domain=<button type="button" class="vtog" data-k="look" aria-pressed="false">no</button></div>
+          </div>
+          <div class="lab-meter" aria-hidden="true"><div class="fill" id="mailBar"></div></div>
+          <div class="lab-out" aria-live="polite">risk=<b id="mailScore">0</b>/100 verdict=<b id="mailVerdict" class="verdict">low</b> <span id="mailWhy"></span></div>
+        </div>
+      </div>
+      <div class="writeup">
+        <p>Most consumer scam detectors work by pattern-matching sender names and obvious red flags — easy to build, easy for an attacker to route around with a lookalike domain. Phishing Risk Analyzer does the actual protocol verification instead: SPF, DKIM, and DMARC checks, including real DKIM signature validation against the sending domain's published public key in DNS.</p>
+        <p>That verification answers one specific question — does this message genuinely come from the domain it claims to? It doesn't answer whether that domain deserves your trust, which is why lookalike-domain detection runs as a separate layer on top.</p>
+        <p>Built independently: the Flask REST API, the scoring engine, and the interface, backed by 84 pytest tests covering the protocol logic.</p>
+      </div>
+      <div class="decision">
+        <div class="decision-label">The decision</div>
+        <p>Verifying DKIM properly means fetching the sender's public key from DNS and validating a cryptographic signature — not just checking that a header field exists. Skipping that and trusting the header at face value would have been much simpler, and nobody would have known the difference from the outside. A detector that only catches obvious scams isn't a detector.</p>
+      </div>
+    </article>
+
+
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="sect-label">Experience <span>most recent first</span></div>
+
+    <div class="role reveal" id="provost-it" data-name="Provost IT Office">
+      <div class="role-top">
+        <div class="role-title">Student Technician</div>
+        <div class="role-when"><span class="live-dot" aria-hidden="true"></span>Oct 2026 — Present</div>
+      </div>
+      <div class="role-org">Information Services Management, Provost IT Office — Texas A&amp;M University</div>
+      <ul>
+        <li>Providing on-site and phone support for the Provost IT Office, troubleshooting computer, network, email, operating system, software, printer, and other peripheral issues.</li>
+        <li>Deploying, configuring, tracking, and maintaining employee workstations and loaner equipment across the office.</li>
+        <li>Writing procedure documentation and handling data entry so support records and equipment inventory stay accurate.</li>
+      </ul>
+    </div>
+
+    <div class="role reveal" id="aggie-collaborate" data-name="Aggie Collaborate">
+      <div class="role-top">
+        <div class="role-title">Internal Assistance Team Member</div>
+        <div class="role-when"><span class="live-dot" aria-hidden="true"></span>Oct 2026 — Present</div>
+      </div>
+      <div class="role-org">Aggie Collaborate — Texas A&amp;M University</div>
+      <ul>
+        <li>Supporting Aggie Collaborate, the university-wide program that connects graduate students, postdocs, and faculty with student researchers across Texas A&amp;M.</li>
+        <li>Working directly with program staff on outreach, communications, and data and operations work, from tracking projects and participation to keeping website content current.</li>
+      </ul>
+    </div>
+
+    <div class="role role-feature reveal" id="aa-role" data-name="ADSC × American Airlines">
+      <div class="role-top">
+        <div class="role-title">Future Market Prediction Project — Team Lead</div>
+        <div class="role-when"><span class="live-dot" aria-hidden="true"></span>Oct 2026 — Present</div>
+      </div>
+      <div class="role-org">Aggie Data Science Club (ADSC) &times; American Airlines</div>
+      <ul>
+        <li>Leading a team of student analysts on a club-wide project with American Airlines to forecast airline market demand up to two years out, built to support the airline's Network Planning decisions.</li>
+        <li>Coordinating my team's weekly data analysis, modeling, and progress checks, and keeping our work in sync with the project managers.</li>
+        <li>Analyzing American Airlines GDD alongside demographic data in Python with Pandas and NumPy to figure out which factors actually drive demand in a given market.</li>
+        <li>Applying time-series forecasting and regression models and evaluating predictions against historical and test data at the market, state, and entity level.</li>
+      </ul>
+    </div>
+
+    <div class="role reveal" id="humansrus" data-name="HumansRUS">
+      <div class="role-top">
+        <div class="role-title">HumansRUS Consultancy Evaluation and Research Lead</div>
+        <div class="role-when"><span class="live-dot" aria-hidden="true"></span>Sep 2026 — Present</div>
+      </div>
+      <div class="role-org">Aggies Create, Texas A&amp;M University</div>
+      <ul>
+        <li>Leading the research and evaluation strategy for a team building AI-generated content detection models and digital watermarking protocols, with this semester's goal being a software extension that verifies whether a photo is human-made.</li>
+        <li>Setting up quantitative testing methods and performance metrics for accuracy, reliability, and error rates so the team can compare detection models on evidence instead of impressions.</li>
+        <li>Reviewing recent academic literature on baseline detection techniques, industry benchmarks, and common failure modes to shape both the team's technical approach and the watermark standard the detection work will rely on.</li>
+      </ul>
+    </div>
+
+    <div class="role reveal" id="hhs" data-name="Texas HHS">
+      <div class="role-top">
+        <div class="role-title">IT Help Desk Triage Support Intern</div>
+        <div class="role-when">Jun 2024 — Aug 2024</div>
+      </div>
+      <div class="role-org">Texas Health &amp; Human Services Commission</div>
+      <ul>
+        <li>Supported the Texas Unified Licensing Information Portal (TULIP), the system professionals across Texas use to apply for and renew occupational licenses, where a stuck ticket can mean someone isn't able to legally work.</li>
+        <li>Worked through 60+ Salesforce support tickets over 80 hours of service, triaging by urgency and user impact instead of the order they arrived, so a user blocked from submitting a renewal before a deadline went ahead of a cosmetic display bug.</li>
+        <li>Built Salesforce reports on resolution metrics that showed something the queue alone didn't, which was that a handful of issue categories kept coming back and drove a disproportionate share of the tickets.</li>
+        <li>Brought those patterns to the team so they could fix root causes instead of closing the same ticket over and over, which is the difference between working a queue and shrinking what enters it.</li>
+        <li>Completed Salesforce Developers Training covering data management, automation, reports and dashboards, security and permissions fundamentals, and platform integrations.</li>
+      </ul>
+    </div>
+
+    <div class="role reveal" id="stemist" data-name="STEM-IST">
+      <div class="role-top">
+        <div class="role-title">Curriculum &amp; Chapter Lead</div>
+        <div class="role-when">Jul 2023 — Jun 2025</div>
+      </div>
+      <div class="role-org">STEM-IST Organization</div>
+      <ul>
+        <li>Co-founded the Texas STEM-IST Chapter and wrote its technical curriculum from scratch, deciding what middle schoolers needed to learn first and how each lesson built on the last.</li>
+        <li>Taught that material directly to middle school students across Texas, translating complex technical topics into something a non-technical audience could actually follow.</li>
+        <li>Organized outreach events and hackathon-focused activities that grew the chapter into an active learning community rather than a one-off class.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CREDENTIALS ================= -->
+  <section id="credentials">
+    <div class="sect-label">Credentials</div>
+    <div class="cred reveal">
+
+      <div class="cred-col">
+        <h3>Certifications &amp; honors</h3>
+        <ul>
+          <li><b>National Cyber Scholar 2024</b><span class="kv">CyberStart America — top 1% nationally</span></li>
+          <li><b>GFACT</b><span class="kv">GIAC Foundational Cybersecurity Technologies</span></li>
+          <li><b>PicoCTF</b><span class="kv">Top 16% team finish</span></li>
+          <li><b>IT Specialist — Java</b><span class="kv">Certiport Information Technology Specialist</span></li>
+          <li><b>CompTIA Security+</b><span class="kv">In progress</span></li>
+        </ul>
+      </div>
+
+      <div class="cred-col">
+        <h3>Technical</h3>
+        <ul>
+          <li><b>Languages</b><span class="kv">Python · Java · C++ · JavaScript · TypeScript · SQL · Linux</span></li>
+          <li><b>Data &amp; ML</b><span class="kv">Pandas · NumPy · time-series forecasting · regression</span></li>
+          <li><b>Web &amp; cloud</b><span class="kv">Node.js · Express · Flask · PostgreSQL · REST APIs · Zerops</span></li>
+          <li><b>Security</b><span class="kv">Cryptography · SPF/DKIM/DMARC · web exploitation · binary analysis · network forensics · reverse engineering</span></li>
+          <li><b>Tools</b><span class="kv">Claude API · Claude Code · Git · pytest · Salesforce</span></li>
+        </ul>
+      </div>
+
+      <div class="cred-col">
+        <h3>Education</h3>
+        <ul>
+          <li><b>Texas A&amp;M University</b><span class="kv">B.S. Computer Science (in progress)</span></li>
+          <li><b>Cybersecurity minor</b><span class="kv">Hoping to add — not yet admitted to the program</span></li>
+          <li><b>Coursework</b><span class="kv">Data Structures &amp; Algorithms (C++) · Object-Oriented Programming · Calculus I &amp; III · Physics I</span></li>
+        </ul>
+      </div>
+
+      <div class="cred-col">
+        <h3>Campus involvement</h3>
+        <ul>
+          <li><b>Aggie Data Science Club (ADSC)</b><span class="kv">Member · Team Lead on the American Airlines demand forecasting project</span></li>
+          <li><b>Product@TAMU</b><span class="kv">Member · Texas A&amp;M's product management club</span></li>
+          <li><b>Texas A&amp;M Cybersecurity Club</b><span class="kv">Weekly workshops on network security and ethical hacking</span></li>
+          <li><b>Aggies Create</b><span class="kv">Evaluation &amp; Research Lead, HumansRUS Consultancy</span></li>
+          <li><b>Aggie Collaborate</b><span class="kv">Internal Assistance Team · outreach, communications, and operations</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="docs reveal">
+      <div class="docs-label">Documents</div>
+      <div class="docs-row">
+        <button class="doc" data-src="images/zerops-certificate.png"
+                data-caption="Zerops Challenge 2026 — Certificate of Participation (WeMakeDevs × Zerops), 8–9 August 2026">
+          <img src="images/zerops-certificate.png" alt="Zerops Challenge 2026 certificate of participation" loading="lazy">
+          <span class="doc-cap">Zerops Challenge 2026<i>certificate of participation</i></span>
+        </button>
+        <button class="doc" data-src="images/hhs-acknowledgment.png"
+                data-caption="Texas Health &amp; Human Services — Certificate of Appreciation for 80 hours of service on the TULIP help desk, June–August 2024">
+          <img src="images/hhs-acknowledgment.png" alt="Texas Health and Human Services certificate of appreciation" loading="lazy">
+          <span class="doc-cap">Texas HHS<i>certificate of appreciation</i></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- lightbox for document images -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Document viewer">
+    <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <figure class="lb-inner">
+      <img id="lbImg" src="" alt="">
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+  </div>
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="sect-label">Contact</div>
+    <p class="contact-line">Open to Summer 2027 internships in security and software engineering.</p>
+    <div class="contact-links">
+      <a class="clink" href="mailto:akshithreddysheri@gmail.com">akshithreddysheri@gmail.com</a>
+      <a class="clink" href="https://www.linkedin.com/in/akshithreddy-sheri" target="_blank" rel="noopener">linkedin.com/in/akshithreddy-sheri</a>
+      <a class="clink" href="https://github.com/arsheri07?tab=repositories" target="_blank" rel="noopener">github.com/arsheri07</a>
+      <a class="clink" href="tel:5126496884">512-649-6884</a>
+      <button class="clink copy" type="button" id="copyEmail">copy email</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <span>Akshithreddy Sheri — Austin, TX</span>
+    <span>Built from scratch. No template.</span>
+  </div>
+</footer>
+
+<script>
+// Resolve the Authentication-Results block on load: each check flips
+// from pending to pass in sequence. Mirrors how a real verifier reports.
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rows = document.querySelectorAll('[data-verdict]');
+  if (reduce) {
+    rows.forEach(function(r){ r.textContent = 'pass'; r.classList.remove('pending'); });
+    return;
+  }
+  rows.forEach(function(r, i){
+    setTimeout(function(){
+      r.textContent = 'pass';
+      r.classList.remove('pending');
+    }, 420 + i * 260);
+  });
+})();
+
+
+// ---------- document lightbox ----------
+(function(){
+  const lb = document.getElementById('lb');
+  if (!lb) return;
+  const img = document.getElementById('lbImg');
+  const cap = document.getElementById('lbCap');
+  let lastFocus = null;
+
+  function open(src, caption, trigger){
+    lastFocus = trigger;
+    img.src = src;
+    img.alt = caption;
+    cap.textContent = caption;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lbClose').focus();
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    img.src = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('.doc').forEach(function(b){
+    b.addEventListener('click', function(){
+      open(b.dataset.src, b.dataset.caption, b);
+    });
+  });
+
+  document.getElementById('lbClose').addEventListener('click', close);
+  // clicking the backdrop closes; clicking the image itself does not
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lb.classList.contains('open')) close();
+  });
+})();
+
+// A missing document file shouldn't leave a broken image icon on the page -
+// hide the whole card instead, so the section degrades cleanly.
+document.querySelectorAll('.doc img').forEach(function(im){
+  im.addEventListener('error', function(){
+    const card = im.closest('.doc');
+    if (card) card.style.display = 'none';
+  });
+});
+
+// ================= interactive layer =================
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(id){var t=document.getElementById(id);if(!t)return;
+    t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    t.classList.remove('spot');void t.offsetWidth;t.classList.add('spot');}
+
+  // 1) reading progress + active nav link
+  var bar=document.getElementById('progressBar');
+  var links=[].slice.call(document.querySelectorAll('.navlinks a[href^="#"]'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement,max=h.scrollHeight-h.clientHeight;
+    if(bar)bar.style.width=(max>0?h.scrollTop/max*100:0)+'%';
+    var cur=-1;secs.forEach(function(sec,i){if(sec&&sec.getBoundingClientRect().top<140)cur=i;});
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // 2) hero rows jump to their section
+  var map={education:'credentials',shipped:'work',experience:'experience',credentials:'credentials'};
+  document.querySelectorAll('.auth-row').forEach(function(r){
+    var k=(r.querySelector('.auth-key')||{}).textContent||'';k=k.split('=')[0].trim();
+    if(!map[k])return;
+    r.classList.add('is-link');r.tabIndex=0;r.setAttribute('role','link');
+    r.setAttribute('aria-label','Go to '+map[k]);
+    r.addEventListener('click',function(){go(map[k]);});
+    r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(map[k]);}});
+  });
+
+  // 3) project filters
+  var projects=[].slice.call(document.querySelectorAll('.project[data-tags]'));
+  var workLabel=document.querySelector('#work .sect-label');
+  if(projects.length&&workLabel){
+    var opts=[['all','All'],['security','Security'],['fullstack','Full-stack'],['ai','AI']];
+    var bar2=document.createElement('div');bar2.className='filters';bar2.setAttribute('role','group');bar2.setAttribute('aria-label','Filter projects');
+    opts.forEach(function(o){
+      var n=o[0]==='all'?projects.length:projects.filter(function(p){return p.dataset.tags.split(' ').indexOf(o[0])>-1;}).length;
+      var b=document.createElement('button');b.type='button';b.className='fbtn';b.dataset.f=o[0];
+      b.setAttribute('aria-pressed',o[0]==='all'?'true':'false');b.innerHTML=o[1]+'<span class="n">'+n+'</span>';
+      b.addEventListener('click',function(){
+        bar2.querySelectorAll('.fbtn').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+        projects.forEach(function(p){
+          var show=o[0]==='all'||p.dataset.tags.split(' ').indexOf(o[0])>-1;
+          var was=!p.classList.contains('filtered-out');
+          p.classList.toggle('filtered-out',!show);
+          if(show&&!was){p.classList.remove('fade-in');void p.offsetWidth;p.classList.add('fade-in');}
+        });
+      });
+      bar2.appendChild(b);
+    });
+    workLabel.insertAdjacentElement('afterend',bar2);
+  }
+
+  // 4) project write-ups: decision stays visible, the long write-up + walkthrough fold away
+  projects.forEach(function(p,idx){
+    var w=p.querySelector('.writeup'),d=p.querySelector('.decision'),demo=p.querySelector('.demo');
+    if(!w)return;
+    if(d)w.parentNode.insertBefore(d,w);
+    var wrap=document.createElement('div');wrap.className='collapsible';wrap.id='more-'+p.id;
+    var inner=document.createElement('div');wrap.appendChild(inner);
+    w.parentNode.insertBefore(wrap,w);inner.appendChild(w);if(demo)inner.appendChild(demo);
+    var btn=document.createElement('button');btn.type='button';btn.className='more-btn';
+    btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-controls',wrap.id);
+    var label=demo?'Read the full write-up + walkthrough':'Read the full write-up';
+    btn.innerHTML='<span class="t">'+label+'</span><span class="chev">↓</span>';
+    wrap.parentNode.insertBefore(btn,wrap);
+    btn.addEventListener('click',function(){
+      var open=wrap.classList.toggle('open');btn.setAttribute('aria-expanded',open);
+      btn.querySelector('.t').textContent=open?'Show less':label;
+    });
+  });
+
+  // 5) experience: first two bullets visible, rest on demand
+  var roles=[].slice.call(document.querySelectorAll('#experience .role'));
+  var toggles=[];
+  roles.forEach(function(r){
+    var lis=r.querySelectorAll('ul li');if(lis.length<=3)return;
+    for(var i=2;i<lis.length;i++)lis[i].classList.add('extra');
+    var b=document.createElement('button');b.type='button';b.className='more-btn';b.setAttribute('aria-expanded','false');
+    var more='+'+(lis.length-2)+' more';
+    b.innerHTML='<span class="t">'+more+'</span><span class="chev">↓</span>';
+    r.querySelector('ul').insertAdjacentElement('afterend',b);
+    function set(open){r.classList.toggle('expanded',open);b.setAttribute('aria-expanded',open);b.querySelector('.t').textContent=open?'Show less':more;}
+    b.addEventListener('click',function(){set(!r.classList.contains('expanded'));});
+    toggles.push(set);
+  });
+  var expLabel=document.querySelector('#experience .sect-label span');
+  if(expLabel&&toggles.length){
+    var all=document.createElement('button');all.type='button';all.className='mini-btn';all.textContent='expand all';
+    var on=false;all.addEventListener('click',function(){on=!on;toggles.forEach(function(t){t(on);});all.textContent=on?'collapse all':'expand all';});
+    expLabel.textContent='';expLabel.appendChild(all);
+  }
+
+  // 6) skills: click one to see where it was used
+  var used={
+    'Python':['credential-leak-scanner','canary','scam-shield','aa-role'],'JavaScript':['kitchensense'],'TypeScript':['kitchensense'],'SQL':['kitchensense'],'Linux':['canary','kitchensense'],
+    'Pandas':['aa-role'],'NumPy':['aa-role'],'time-series forecasting':['aa-role'],'regression':['aa-role'],
+    'Node.js':['kitchensense'],'Flask':['scam-shield'],'PostgreSQL':['kitchensense'],'REST APIs':['kitchensense'],'Zerops':['kitchensense'],
+    'Cryptography':['canary','scam-shield'],'Regex':['credential-leak-scanner'],'SPF/DKIM/DMARC':['scam-shield'],
+    'Claude API':['kitchensense'],'Claude Code':['kitchensense'],'Git':['credential-leak-scanner','kitchensense','canary'],'Salesforce':['hhs']
+  };
+  var techCol=[].slice.call(document.querySelectorAll('.cred-col')).filter(function(c){var h=c.querySelector('h3');return h&&/Technical/.test(h.textContent);})[0];
+  if(techCol){
+    var hint=document.createElement('p');hint.className='cred-hint';hint.textContent='Click a skill to see where I used it';
+    techCol.querySelector('h3').insertAdjacentElement('afterend',hint);
+    var active=null;
+    techCol.querySelectorAll('li').forEach(function(li){
+      var kv=li.querySelector('.kv');if(!kv)return;
+      var panel=document.createElement('div');panel.className='used-in';panel.setAttribute('aria-live','polite');
+      var parts=kv.textContent.split(' · ');kv.textContent='';
+      parts.forEach(function(p,i){
+        if(i)kv.appendChild(document.createTextNode(' · '));
+        var ids=used[p.trim()];
+        if(!ids){kv.appendChild(document.createTextNode(p));return;}
+        var b=document.createElement('button');b.type='button';b.className='skill-btn';b.textContent=p;b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          var same=active===b;
+          if(active){active.setAttribute('aria-pressed','false');active._panel.classList.remove('show');}
+          if(same){active=null;return;}
+          active=b;b._panel=panel;b.setAttribute('aria-pressed','true');
+          panel.innerHTML='Used in: ';
+          ids.forEach(function(id){var t=document.getElementById(id);if(!t)return;
+            var a=document.createElement('a');a.href='#'+id;a.textContent=(t.dataset.name||id)+' →';
+            a.addEventListener('click',function(e){e.preventDefault();
+              if(t.classList.contains('filtered-out')){var allBtn=document.querySelector('.fbtn[data-f="all"]');if(allBtn)allBtn.click();}
+              go(id);});
+            panel.appendChild(a);});
+          panel.classList.add('show');
+        });
+        kv.appendChild(b);
+      });
+      li.appendChild(panel);
+    });
+  }
+})();
+
+// Scroll reveal
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(e){ e.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: .08 });
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+<script>
+/* ---------- v5: dark mode, labs, copy email ---------- */
+(function(){
+  var root=document.documentElement;
+  function $(s){return document.querySelector(s);}
+  function toast(m){var t=$('#toast');if(!t)return;t.textContent=m;t.classList.add('show');clearTimeout(toast.k);toast.k=setTimeout(function(){t.classList.remove('show');},1800);}
+
+  // dark mode
+  var tb=$('#themeBtn');
+  function sync(){var d=root.getAttribute('data-theme')==='dark';tb.textContent=d?'light':'dark';tb.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  if(tb){sync();tb.addEventListener('click',function(){var d=root.getAttribute('data-theme')!=='dark';
+    if(d)root.setAttribute('data-theme','dark');else root.removeAttribute('data-theme');
+    try{localStorage.setItem('theme',d?'dark':'light');}catch(e){}sync();});}
+
+  // Canary: Shannon entropy of the bytes, the same signal the tool uses
+  (function(){var ta=$('#entText');if(!ta)return;
+    var fill=document.querySelector('[data-lab="entropy"] .fill'),num=$('#entNum'),ver=$('#entVerdict'),note=$('#entNote'),orig=ta.value;
+    function H(b){if(!b.length)return 0;var c=new Array(256).fill(0);for(var i=0;i<b.length;i++)c[b[i]]++;var h=0;for(var j=0;j<256;j++)if(c[j]){var p=c[j]/b.length;h-=p*Math.log2(p);}return h;}
+    function show(h){var hot=h>=7.5;num.textContent=h.toFixed(2);fill.style.width=(h/8*100)+'%';fill.classList.toggle('hot',hot);
+      ver.textContent=hot?'fail':'pass';ver.classList.toggle('bad',hot);
+      note.textContent=hot?'— looks encrypted; Canary would alert':(h>=6?'— unusually random for a document':'— looks like normal data');}
+    function fromText(){ta.readOnly=false;show(H(new TextEncoder().encode(ta.value)));}
+    ta.addEventListener('input',fromText);
+    $('#entEncrypt').addEventListener('click',function(){var n=Math.max(4096,ta.value.length);var c=new Uint8Array(n);crypto.getRandomValues(c);
+      var s='';for(var i=0;i<96;i++)s+=c[i].toString(16).padStart(2,'0')+(i%2?' ':'');ta.value=s+'…';ta.readOnly=true;show(H(c));});
+    $('#entReset').addEventListener('click',function(){ta.value=orig;fromText();});
+    fromText();})();
+
+  // Credential Leak Scanner: the same rules + entropy filter as the CLI, run in the browser
+  (function(){var ta=$('#secText');if(!ta)return;
+    var cnt=$('#secCount'),ver=$('#secVerdict'),note=$('#secNote'),list=$('#secList');
+    function rnd(n,a){var c=new Uint32Array(n);crypto.getRandomValues(c);var s='';for(var i=0;i<n;i++)s+=a[c[i]%a.length];return s;}
+    var AN='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',UP='ABCDEFGHIJKLMNOPQRSTUVWXYZ0234567';
+    var base='DEBUG = True\nDATABASE_URL = os.environ["DATABASE_URL"]\nAPI_KEY = "your-api-key-here"\nTIMEOUT = 30';
+    var leaks=[function(){return 'AWS_ACCESS_KEY_ID = "'+'AK'+'IA'+rnd(16,UP)+'"';},
+               function(){return 'GITHUB_TOKEN = "'+'gh'+'p_'+rnd(36,AN)+'"';},
+               function(){return 'STRIPE_KEY = "'+'sk'+'_live_'+rnd(24,AN)+'"';},
+               function(){return 'DB = "postgres://admin:'+rnd(14,AN)+'@db.internal/app"';}],li=0; // credscan: ignore (demo generator)
+    var rules=[['AWS access key ID','high',/\b((?:AKIA|ASIA)[0-9A-Z]{16})\b/g,3],
+      ['GitHub token','high',/\b(gh[pousr]_[A-Za-z0-9]{36,255})\b/g,3.5],
+      ['Slack token','high',/\b(xox[abposr]-[A-Za-z0-9-]{10,72})\b/g,3],
+      ['Stripe secret key','high',/\b((?:sk|rk)_live_[A-Za-z0-9]{20,99})\b/g,3.5],
+      ['Google API key','high',/\b(AIza[0-9A-Za-z_\-]{35})\b/g,3.5],
+      ['Private key','high',/(-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)/g,0],
+      ['Password in connection string','high',/\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis):\/\/[^:\s\/]+:([^@\s\/]{6,})@/g,3],
+      ['Hard-coded secret','medium',/\b(?:password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret)\b\s*[:=]\s*['"]([^'"\s]{8,})['"]/gi,3.5]];
+    var hints=['example','sample','dummy','placeholder','changeme','your_','your-','<','xxxx','${','{','environ','getenv'];
+    function H(s){var m={},h=0;for(var i=0;i<s.length;i++)m[s[i]]=(m[s[i]]||0)+1;for(var k in m){var p=m[k]/s.length;h-=p*Math.log2(p);}return h;}
+    function red(s){return s.length<=8?'*'.repeat(s.length):s.slice(0,4)+'*'.repeat(Math.min(s.length-8,24))+s.slice(-4);}
+    function scan(){var out=[];ta.value.split('\n').forEach(function(line,n){var seen={};
+        rules.forEach(function(r){r[2].lastIndex=0;var m;while((m=r[2].exec(line))){var s=m[1];if(seen[s])continue;var e=H(s);
+          if(r[3]&&e<r[3])continue;if(r[0]!=='Private key'&&hints.some(function(h){return s.toLowerCase().indexOf(h)>=0;}))continue;
+          seen[s]=1;out.push({d:r[0],sev:r[1],line:n+1,m:red(s),e:e});}});});
+      cnt.textContent=out.length;var bad=out.length>0;ver.textContent=bad?'fail':'pass';ver.classList.toggle('bad',bad);
+      note.textContent=bad?'— commit blocked (exit code 1)':'— placeholders and env vars are ignored';
+      list.innerHTML='';out.forEach(function(f){var li=document.createElement('li');
+        li.innerHTML='<b>'+f.sev.toUpperCase()+'</b> '+f.d+' · line '+f.line+'<br><span class="m">match: '+f.m+'  entropy: '+f.e.toFixed(2)+'</span>';list.appendChild(li);});}
+    ta.addEventListener('input',scan);
+    $('#secLeak').addEventListener('click',function(){ta.value=ta.value.replace(/\s*$/,'')+'\n'+leaks[li++%leaks.length]();scan();});
+    $('#secPlace').addEventListener('click',function(){ta.value=ta.value.replace(/\s*$/,'')+'\nPASSWORD = "changeme123"';scan();});
+    $('#secReset').addEventListener('click',function(){ta.value=base;li=0;scan();});
+    ta.value=base;scan();})();
+
+  // Phishing Risk Analyzer: flip a verdict, watch the risk score respond
+  (function(){var box=document.querySelector('[data-lab="mail"]');if(!box)return;
+    var score=$('#mailScore'),ver=$('#mailVerdict'),why=$('#mailWhy'),bar=$('#mailBar'),from=$('#mailFrom');
+    var btns=[].slice.call(box.querySelectorAll('.vtog'));
+    function on(k){return box.querySelector('[data-k="'+k+'"]').getAttribute('aria-pressed')==='true';}
+    function render(){var s=0,r=[];
+      if(!on('spf')){s+=25;r.push('SPF failed');}if(!on('dkim')){s+=30;r.push('DKIM failed');}if(!on('dmarc')){s+=25;r.push('DMARC failed');}
+      var look=on('look');if(look){s+=35;r.push('the domain imitates a real bank');}s=Math.min(100,s);
+      btns.forEach(function(b){var k=b.dataset.k,p=b.getAttribute('aria-pressed')==='true';
+        if(k==='look'){b.textContent=p?'yes':'no';b.classList.toggle('bad',p);}else{b.textContent=p?'pass':'fail';b.classList.toggle('bad',!p);}});
+      from.textContent=look?'billing@n0rthbank-secure.com':'billing@northbank.com';
+      score.textContent=s;bar.style.width=s+'%';bar.classList.toggle('hot',s>=30);
+      ver.textContent=s>=60?'high':(s>=30?'suspicious':'low');ver.classList.toggle('bad',s>=30);
+      why.textContent=r.length?'— '+(r.length>1?r.slice(0,-1).join(', ')+' and '+r[r.length-1]:r[0]):'— every check passed';}
+    btns.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');render();});});
+    render();})();
+
+  // copy email
+  var cb=$('#copyEmail');
+  if(cb)cb.addEventListener('click',function(){var a='akshithreddysheri@gmail.com';
+    function done(){toast('Email copied: '+a);}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(a).then(done,done);else done();});
+})();
+</script>
+<script>
+/* ---------- v7: meal planner, re-run checks, quick jump, back to top ---------- */
+(function(){
+  function $(s){return document.querySelector(s);}
+  function $$(s){return [].slice.call(document.querySelectorAll(s));}
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // KitchenSense: allergies remove recipes (hard filter); preferences only reorder (soft rank)
+  (function(){var list=$('#mealList');if(!list)return;
+    var recipes=[
+      {n:'Chicken stir-fry',a:[],veg:0,quick:1,spicy:1,base:5},
+      {n:'Mac and cheese',a:['dairy','gluten'],veg:1,quick:1,spicy:0,base:6},
+      {n:'Peanut noodles',a:['peanuts','gluten'],veg:1,quick:1,spicy:1,base:7},
+      {n:'Black bean tacos',a:[],veg:1,quick:1,spicy:1,base:4},
+      {n:'Salmon and rice',a:[],veg:0,quick:0,spicy:0,base:5},
+      {n:'Veggie lasagna',a:['dairy','gluten'],veg:1,quick:0,spicy:0,base:3}];
+    var out=$('#mealOut'),last=[];
+    function on(sel){return $$(sel+' .vtog[aria-pressed="true"]').map(function(b){return b.dataset.a||b.dataset.p;});}
+    function render(){var al=on('#allergyPick'),pr=on('#prefPick');
+      var keep=[],gone=[];
+      recipes.forEach(function(r){var hit=r.a.filter(function(x){return al.indexOf(x)>=0;});
+        if(hit.length)gone.push({r:r,why:'contains '+hit.join(' + ')});
+        else{var s=r.base;pr.forEach(function(p){if(r[p])s+=4;});keep.push({r:r,s:s});}});
+      keep.sort(function(x,y){return y.s-x.s;});
+      list.innerHTML='';
+      keep.forEach(function(k,i){var li=document.createElement('li');
+        var tags=[];if(k.r.veg)tags.push('veg');if(k.r.quick)tags.push('quick');if(k.r.spicy)tags.push('spicy');
+        li.innerHTML='<span class="nm"></span><span class="tg"></span>';li.firstChild.textContent=k.r.n;li.lastChild.textContent=tags.join(' · ')||'—';
+        if(last.length&&last.indexOf(k.r.n)!==i&&!reduce)li.classList.add('moved');list.appendChild(li);});
+      gone.forEach(function(g){var li=document.createElement('li');li.className='out';
+        li.innerHTML='<span class="nm"></span><span class="tg"></span>';li.firstChild.textContent=g.r.n;li.lastChild.textContent='removed · '+g.why;list.appendChild(li);});
+      last=keep.map(function(k){return k.r.n;});
+      out.textContent=keep.length+' of '+recipes.length+' recipes safe to cook'+(gone.length?' · '+gone.length+' removed by allergy filter':'')+(pr.length?' · ranked by your preferences':'');}
+    $$('#allergyPick .vtog, #prefPick .vtog').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');render();});});
+    render();})();
+
+  // re-run the Authentication-Results checks
+  (function(){var b=$('#rerun');if(!b)return;
+    b.addEventListener('click',function(){var vs=$$('[data-verdict]');
+      vs.forEach(function(v){v.textContent='····';v.classList.add('pending');});
+      vs.forEach(function(v,i){setTimeout(function(){v.textContent='pass';v.classList.remove('pending');},reduce?0:300+i*280);});});})();
+
+  // back to top
+  (function(){var b=$('#toTop');if(!b)return;
+    window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>900);},{passive:true});
+    b.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});})();
+
+  // quick jump: press "/" (or click "/ jump") to search sections, projects, and roles
+  (function(){var box=$('#jump'),inp=$('#jumpInput'),ul=$('#jumpList');if(!box)return;
+    var items=[];
+    $$('section[id]').forEach(function(s){var l=s.querySelector('.sect-label');if(l)items.push({t:l.childNodes[0].textContent.trim(),k:'section',el:s});});
+    $$('.project[id]').forEach(function(p){items.push({t:p.dataset.name||p.id,k:'project',el:p});});
+    $$('.role[id]').forEach(function(r){var tt=r.querySelector('.role-title');items.push({t:(tt?tt.textContent:'').trim()+' · '+(r.dataset.name||''),k:'experience',el:r});});
+    var shown=[],sel=0;
+    function draw(){var q=inp.value.toLowerCase().trim();shown=items.filter(function(i){return !q||i.t.toLowerCase().indexOf(q)>=0||i.k.indexOf(q)===0;});
+      sel=Math.min(sel,Math.max(0,shown.length-1));ul.innerHTML='';
+      shown.forEach(function(i,n){var li=document.createElement('li');li.setAttribute('role','option');li.setAttribute('aria-selected',n===sel?'true':'false');
+        li.textContent=i.t;var sp=document.createElement('span');sp.textContent=i.k;li.appendChild(sp);
+        li.addEventListener('click',function(){go(i);});ul.appendChild(li);});
+      if(!shown.length){var li=document.createElement('li');li.textContent='No matches';ul.appendChild(li);}}
+    function go(i){close();var col=i.el.querySelector&&i.el.closest('.collapsible');
+      i.el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}
+    function open(){box.classList.add('open');inp.value='';sel=0;draw();setTimeout(function(){inp.focus();},20);}
+    function close(){box.classList.remove('open');}
+    var jb=$('#jumpBtn');if(jb)jb.addEventListener('click',open);
+    box.addEventListener('click',function(e){if(e.target===box)close();});
+    inp.addEventListener('input',function(){sel=0;draw();});
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,shown.length-1);draw();}
+      else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);draw();}
+      else if(e.key==='Enter'){e.preventDefault();if(shown[sel])go(shown[sel]);}
+      else if(e.key==='Escape'){close();}});
+    document.addEventListener('keydown',function(e){var typing=/input|textarea|select/i.test(e.target.tagName||'');
+      if(!typing&&e.key==='/'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();open();}
+      else if(e.key==='Escape'&&box.classList.contains('open'))close();});})();
+})();
+</script>
+</body>
+</html>
