@@ -21,7 +21,7 @@ Each project has a small in-browser demo that runs the real idea, not a screensh
 
 - **Credential Leak Scanner:** paste or "leak" a key into a config file and watch the same regex + entropy rules flag it (placeholders are ignored)
 - **Canary:** measure the Shannon entropy of text, then "encrypt" it and watch entropy jump toward 8 bits/byte
-- **Phishing Risk Analyzer:** toggle SPF, DKIM, DMARC and a lookalike domain to see the risk score respond
+- **Phishing Risk Analyzer:** toggle SPF, DKIM, DMARC, a lookalike domain, and a homograph (a Cyrillic letter posing as a Latin one) to see the risk score respond
 - **KitchenSense:** toggle allergies and preferences; restrictions remove recipes, preferences reorder them
 
 Also: dark mode, a command palette (`/` or Ctrl/Cmd+K), project filters, and a skill-to-project map.

@@ -627,6 +627,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="writeup">
         <p>Built solo in 48 hours for The Zerops Challenge, a WeMakeDevs hackathon. The vision layer uses Claude Haiku 4.5 to pull structured inventory data out of ordinary phone photos — the hard part isn't recognizing food, it's turning a cluttered shelf into rows a database can reason about.</p>
         <p>On top of that sits a recipe-matching and meal-planning engine covering a 38-recipe catalog, with an urgency-aware greedy scheduler that pushes ingredients closest to spoiling into earlier meals.</p>
+        <p>Missing an ingredient doesn't always mean a trip to the store, so matching is substitution-aware: olive oil can stand in for butter, lime for lemon, shallots for onion. A recipe whose every gap is covered is marked "ready with swaps" and ranked first. Each swap is re-checked against your dietary restrictions with the swap applied (a dairy-free cook is never told to use cream), and the meal planner counts swapped ingredients as already owned. 19 unit tests cover it, including the matcher end to end against an in-memory database stand-in.</p>
         <p>The backend runs as a two-service dev/stage pipeline on Zerops, with database migrations that apply atomically and automatically on every deploy. I drove the whole build-deploy-debug loop through Claude Code and Zerops' control-plane tooling, debugging against live logs rather than clicking through a cloud console.</p>
       </div>
       <div class="decision">
@@ -650,14 +651,14 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="proj-top">
         <h2 class="proj-name">Canary</h2>
         <div class="proj-top-right">
-          <div class="proj-meta">Sep 2026 · personal project · 36 tests</div>
+          <div class="proj-meta">Sep 2026 · personal project · 47 tests</div>
           <a class="repo-link" href="https://github.com/arsheri07/canary" target="_blank" rel="noopener">github.com/arsheri07/canary</a>
         </div>
       </div>
       <p class="proj-line">A file integrity monitor that tells the difference between you editing a file and ransomware encrypting it.</p>
       <div class="stack">
         <span class="chip">Python</span><span class="chip">SHA-256</span><span class="chip">Shannon entropy</span>
-        <span class="chip">Linux</span><span class="chip">CLI</span>
+        <span class="chip">HMAC-SHA256</span><span class="chip">Linux</span><span class="chip">CLI</span>
       </div>
       <div class="lab" data-lab="entropy">
         <div class="lab-head"><span>try it · entropy check</span><span>canary --scan</span></div>
@@ -674,6 +675,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
         <p>Point it at a folder and it fingerprints every file with SHA-256. Run it again later and it tells you exactly what was added, modified, or deleted. File integrity monitoring is a required control under PCI-DSS 11.5 and CIS Control 3 — Tripwire and OSSEC are the commercial versions of this idea.</p>
         <p>The harder problem is interpretation. Forty files changing could be a build finishing, or it could be ransomware working through your documents. Six signals contribute to a score, because any one of them has an innocent explanation and almost nothing legitimate produces several at once.</p>
         <p>Ransomware doesn't announce itself, but it does have to encrypt. That's the property this leans on: encryption is designed to produce output indistinguishable from noise, and noise looks measurably different from English text.</p>
+        <p>The monitor also has to protect itself. Every verdict is "compared to the baseline," so the baseline is what an attacker would edit: encrypt a file, write its new hash into the snapshot, and nothing looks wrong. Each snapshot is signed with HMAC-SHA256 under a private key, checked in constant time on every scan; an edited baseline is refused outright. Ignore patterns (<code>.canaryignore</code>) are frozen inside that signature, so adding <code>*.docx</code> to the ignore file can't blind it either. 47 tests, including ones that attack Canary's own baseline, run in CI on Linux and macOS.</p>
       </div>
       <div class="decision">
         <div class="decision-label">The decision</div>
@@ -682,19 +684,19 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
     </article>
 
     <!-- Phishing Risk Analyzer -->
-    <article class="project reveal" id="scam-shield" data-tags="security fullstack" data-name="Phishing Risk Analyzer">
+    <article class="project reveal" id="phishing-risk-analyzer" data-tags="security fullstack" data-name="Phishing Risk Analyzer">
       <div class="proj-top">
         <h2 class="proj-name">Phishing Risk Analyzer</h2>
         <div class="proj-top-right">
-          <div class="proj-meta">Aug 2026 · personal project · 84 tests</div>
+          <div class="proj-meta">Aug 2026 · personal project · 101 tests</div>
           <a class="repo-link" href="https://github.com/arsheri07/phishing-risk-analyzer" target="_blank" rel="noopener">github.com/arsheri07/phishing-risk-analyzer</a>
           <a class="repo-link" href="https://phishing-risk-analyzer-suk0.onrender.com" target="_blank" rel="noopener">live demo</a>
         </div>
       </div>
-      <p class="proj-line">One risk-scoring engine that reviews emails, websites, texts, and app listings through real email authentication, not pattern matching.</p>
+      <p class="proj-line">One risk-scoring engine that reviews emails, websites, texts, call transcripts, and app listings through real email authentication, not pattern matching.</p>
       <div class="stack">
         <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">SPF/DKIM/DMARC</span>
-        <span class="chip">pytest</span>
+        <span class="chip">IDN homographs</span><span class="chip">pytest</span>
       </div>
       <div class="lab" data-lab="mail">
         <div class="lab-head"><span>try it · score an email</span><span>click a verdict to flip it</span></div>
@@ -705,6 +707,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
             <div>dkim=<button type="button" class="vtog" data-k="dkim" aria-pressed="true">pass</button></div>
             <div>dmarc=<button type="button" class="vtog" data-k="dmarc" aria-pressed="true">pass</button></div>
             <div>lookalike_domain=<button type="button" class="vtog" data-k="look" aria-pressed="false">no</button></div>
+            <div>homograph=<button type="button" class="vtog" data-k="homo" aria-pressed="false">no</button></div>
           </div>
           <div class="lab-meter" aria-hidden="true"><div class="fill" id="mailBar"></div></div>
           <div class="lab-out" aria-live="polite">risk=<b id="mailScore">0</b>/100 verdict=<b id="mailVerdict" class="verdict">low</b> <span id="mailWhy"></span></div>
@@ -713,7 +716,8 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="writeup">
         <p>Most consumer scam detectors work by pattern-matching sender names and obvious red flags — easy to build, easy for an attacker to route around with a lookalike domain. Phishing Risk Analyzer does the actual protocol verification instead: SPF, DKIM, and DMARC checks, including real DKIM signature validation against the sending domain's published public key in DNS.</p>
         <p>That verification answers one specific question — does this message genuinely come from the domain it claims to? It doesn't answer whether that domain deserves your trust, which is why lookalike-domain detection runs as a separate layer on top.</p>
-        <p>Built independently: the Flask REST API, the scoring engine, and the interface, backed by 84 pytest tests covering the protocol logic.</p>
+        <p>The hardest lookalikes aren't misspellings. <code>nоrthbank.com</code> with a Cyrillic <code>о</code> renders identically, travels as punycode, and passes SPF, DKIM and DMARC, because the attacker really does own it. Every link domain is decoded and reduced to a confusable skeleton (the Unicode TR39 idea browsers use), then matched against the brand list exactly. It also flags links whose visible text names one site while the href opens another. Building it exposed a real bug: Python's email parser was turning non-ASCII body text into <code>\u</code> escapes, so the lookalike letter never reached the detector at all.</p>
+        <p>Built independently: the Flask REST API, the scoring engine, and the interface (including a session case log and plain-text reports for IT tickets), backed by 101 pytest tests.</p>
       </div>
       <div class="decision">
         <div class="decision-label">The decision</div>
@@ -1068,10 +1072,10 @@ document.querySelectorAll('.doc img').forEach(function(im){
 
   // 6) skills: click one to see where it was used
   var used={
-    'Python':['credential-leak-scanner','canary','scam-shield','aa-role'],'JavaScript':['kitchensense'],'TypeScript':['kitchensense'],'SQL':['kitchensense'],'Linux':['canary','kitchensense'],
+    'Python':['credential-leak-scanner','canary','phishing-risk-analyzer','aa-role'],'JavaScript':['kitchensense'],'TypeScript':['kitchensense'],'SQL':['kitchensense'],'Linux':['canary','kitchensense'],
     'Pandas':['aa-role'],'NumPy':['aa-role'],'time-series forecasting':['aa-role'],'regression':['aa-role'],
-    'Node.js':['kitchensense'],'Flask':['scam-shield'],'PostgreSQL':['kitchensense'],'REST APIs':['kitchensense'],'Zerops':['kitchensense'],
-    'Cryptography':['canary','scam-shield'],'Regex':['credential-leak-scanner'],'SPF/DKIM/DMARC':['scam-shield'],
+    'Node.js':['kitchensense'],'Flask':['phishing-risk-analyzer'],'PostgreSQL':['kitchensense'],'REST APIs':['kitchensense'],'Zerops':['kitchensense'],
+    'Cryptography':['canary','phishing-risk-analyzer'],'Regex':['credential-leak-scanner'],'SPF/DKIM/DMARC':['phishing-risk-analyzer'],
     'Claude API':['kitchensense'],'Claude Code':['kitchensense'],'Git':['credential-leak-scanner','kitchensense','canary'],'Salesforce':['hhs']
   };
   var techCol=[].slice.call(document.querySelectorAll('.cred-col')).filter(function(c){var h=c.querySelector('h3');return h&&/Technical/.test(h.textContent);})[0];
@@ -1194,10 +1198,11 @@ document.querySelectorAll('.doc img').forEach(function(im){
     function on(k){return box.querySelector('[data-k="'+k+'"]').getAttribute('aria-pressed')==='true';}
     function render(){var s=0,r=[];
       if(!on('spf')){s+=25;r.push('SPF failed');}if(!on('dkim')){s+=30;r.push('DKIM failed');}if(!on('dmarc')){s+=25;r.push('DMARC failed');}
-      var look=on('look');if(look){s+=35;r.push('the domain imitates a real bank');}s=Math.min(100,s);
+      var look=on('look');if(look){s+=35;r.push('the domain imitates a real bank');}
+      var homo=on('homo');if(homo){s+=40;r.push('a Cyrillic \u043e is posing as an o, so the authentication checks pass for the fake domain');}s=Math.min(100,s);
       btns.forEach(function(b){var k=b.dataset.k,p=b.getAttribute('aria-pressed')==='true';
-        if(k==='look'){b.textContent=p?'yes':'no';b.classList.toggle('bad',p);}else{b.textContent=p?'pass':'fail';b.classList.toggle('bad',!p);}});
-      from.textContent=look?'billing@n0rthbank-secure.com':'billing@northbank.com';
+        if(k==='look'||k==='homo'){b.textContent=p?'yes':'no';b.classList.toggle('bad',p);}else{b.textContent=p?'pass':'fail';b.classList.toggle('bad',!p);}});
+      from.textContent=look?'billing@n0rthbank-secure.com':(homo?'billing@n\u043erthbank.com':'billing@northbank.com');
       score.textContent=s;bar.style.width=s+'%';bar.classList.toggle('hot',s>=30);
       ver.textContent=s>=60?'high':(s>=30?'suspicious':'low');ver.classList.toggle('bad',s>=30);
       why.textContent=r.length?'— '+(r.length>1?r.slice(0,-1).join(', ')+' and '+r[r.length-1]:r[0]):'— every check passed';}
