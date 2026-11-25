@@ -10,6 +10,7 @@ The design borrows from an email `Authentication-Results` header: every claim on
 
 | Project | What it is |
 |---|---|
+| Lead Router (team repo, private) | 1st place, Texas A&M × Salesforce Challenge: lead scoring/routing system and React manager dashboard |
 | [Credential Leak Scanner](https://github.com/arsheri07/credential-leak-scanner) | CLI that finds leaked API keys and passwords in code and git history |
 | [KitchenSense](https://github.com/arsheri07/kitchen-sense) | Full-stack app that turns fridge photos into a PostgreSQL inventory |
 | [Canary](https://github.com/arsheri07/canary) | File integrity monitor that detects ransomware through entropy |

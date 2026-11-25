@@ -530,7 +530,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
         </div>
         <div class="auth-row">
           <span class="auth-key">shipped=<span class="verdict pending" data-verdict>····</span></span>
-          <span class="auth-val">Four projects built end to end, one in 48 hours</span>
+          <span class="auth-val">Five projects built end to end, one in 48 hours · 1st place, Texas A&amp;M &times; Salesforce Challenge</span>
         </div>
         <div class="auth-row">
           <span class="auth-key">experience=<span class="verdict pending" data-verdict>····</span></span>
@@ -554,7 +554,31 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
 
   <!-- ================= WORK ================= -->
   <section id="work">
-    <div class="sect-label">Selected work <span>four projects, built end to end</span></div>
+    <div class="sect-label">Selected work <span>five projects, built end to end</span></div>
+
+    <!-- Lead Router -->
+    <article class="project reveal" id="lead-router" data-tags="fullstack ai" data-name="Lead Router">
+      <div class="proj-top">
+        <h2 class="proj-name">Lead Router</h2>
+        <div class="proj-top-right">
+          <div class="proj-meta">Nov 2026 · 1st place · team of 5 · 496 tests</div>
+          <span class="proj-meta">team repo · private</span>
+        </div>
+      </div>
+      <p class="proj-line">A lead scoring and routing system with a manager dashboard that won 1st place in the Texas A&amp;M &times; Salesforce Challenge.</p>
+      <div class="stack">
+        <span class="chip">Python</span><span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">Claude API</span>
+      </div>
+      <div class="writeup">
+        <p>Sales teams lose time when hot leads sit in the wrong queue. Lead Router cleans messy lead data, scores each lead, and assigns it to a rep. It assigns 50,000 leads in 0.64 seconds and places every Critical, High, and Medium lead.</p>
+        <p>I built the Salesforce-style React dashboard, where a sales manager can spot stuck leads in under 5 seconds. It shows four key numbers, a sorted lead queue, and a rep capacity view, and it explains why each lead got its score and its rep. A natural-language Ask box pulls matching records and has Claude (Haiku) answer from them, with a rule-based fallback.</p>
+        <p>On the 5-person team I also worked on routing that spreads work 30&times; more evenly across 1,506 reps, and on a cleaning step that made 0 wrong matches across 666,000 test typos, backed by 496 automated tests.</p>
+      </div>
+      <div class="decision">
+        <div class="decision-label">The decision</div>
+        <p>All sorting, filtering, and paging happen on the server, not in the browser. The dashboard only draws the page you're looking at, so it stays fast on 50,000 leads while live updates arrive every 300 ms.</p>
+      </div>
+    </article>
 
     <!-- Credential Leak Scanner -->
     <article class="project reveal" id="credential-leak-scanner" data-tags="security" data-name="Credential Leak Scanner">
@@ -822,6 +846,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="cred-col">
         <h3>Certifications &amp; honors</h3>
         <ul>
+          <li><b>1st Place, Texas A&amp;M &times; Salesforce Challenge</b><span class="kv">Nov 2026 — automated lead routing system and manager dashboard</span></li>
           <li><b>National Cyber Scholar 2024</b><span class="kv">CyberStart America — top 1% nationally</span></li>
           <li><b>GFACT</b><span class="kv">GIAC Foundational Cybersecurity Technologies</span></li>
           <li><b>PicoCTF</b><span class="kv">Top 16% team finish</span></li>
@@ -833,11 +858,11 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="cred-col">
         <h3>Technical</h3>
         <ul>
-          <li><b>Languages</b><span class="kv">Python · Java · C++ · JavaScript · TypeScript · SQL · Linux</span></li>
+          <li><b>Languages</b><span class="kv">Python · Java · C++ · JavaScript · TypeScript · SQL</span></li>
           <li><b>Data &amp; ML</b><span class="kv">Pandas · NumPy · time-series forecasting · regression</span></li>
-          <li><b>Web &amp; cloud</b><span class="kv">Node.js · Express · Flask · PostgreSQL · REST APIs · Zerops</span></li>
-          <li><b>Security</b><span class="kv">Cryptography · SPF/DKIM/DMARC · web exploitation · binary analysis · network forensics · reverse engineering</span></li>
-          <li><b>Tools</b><span class="kv">Claude API · Claude Code · Git · pytest · Salesforce</span></li>
+          <li><b>Web &amp; cloud</b><span class="kv">React · Node.js · Express · Flask · PostgreSQL · REST APIs · Zerops</span></li>
+          <li><b>Security</b><span class="kv">SPF/DKIM/DMARC · secret scanning · file integrity monitoring · SHA-256 / HMAC · Shannon entropy</span></li>
+          <li><b>Tools</b><span class="kv">Linux · Git · GitHub Actions · pytest · Claude API · Claude Code · Salesforce</span></li>
         </ul>
       </div>
 
