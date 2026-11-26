@@ -2,6 +2,9 @@
 
 Live at https://arsheri.vercel.app (Vercel deploys every push to `main`).
 
+## 2026-11-26
+- Admitted to the Cybersecurity minor: replaced "hoping to add" wording in the intro, meta descriptions, summary card and Education list with "Cybersecurity minor (in progress)".
+
 ## 2026-11-25
 - **Lead Router (new, first in Selected work):** 1st place, Texas A&M × Salesforce Challenge. Lead scoring/routing (50,000 leads in 0.64 s), React manager dashboard, Claude (Haiku) Ask box with rule-based fallback, 496 tests. Team repo is private, so the card shows "team repo · private" instead of a link.
 - Award added to Certifications & honors; project counts updated from four to five (summary card and Selected work label).
