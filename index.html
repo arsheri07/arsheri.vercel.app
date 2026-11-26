@@ -469,6 +469,116 @@ section[id],.project[id],.role[id]{scroll-margin-top:72px}
   .auth-val{font-size:13.5px}
   .navlinks{gap:14px;font-size:12px}
 }
+
+/* ============================================================
+   v8 visual refresh (2026-11-26)
+   Same idea, the Authentication-Results header, with more depth:
+   a terminal window for the hero block, ambient glow, rounded cards
+   with a per-track accent, a timeline for experience.
+   ============================================================ */
+:root{--r-lg:14px;--r-md:10px;--accent:var(--pass);--glow-a:rgba(11,110,81,.13);--glow-b:rgba(27,68,196,.12);
+  --shadow:0 1px 2px rgba(15,22,32,.05),0 14px 34px -22px rgba(15,22,32,.35)}
+:root[data-theme="dark"]{--glow-a:rgba(60,203,149,.12);--glow-b:rgba(138,168,255,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 40px -24px rgba(0,0,0,.8)}
+body{background-image:radial-gradient(var(--rule-2) 1px,transparent 1.2px);background-size:24px 24px;background-attachment:fixed}
+
+/* hero */
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:-30%;right:-30%;top:-90px;height:640px;
+  background:radial-gradient(520px 300px at 22% 32%,var(--glow-a),transparent 70%),radial-gradient(480px 300px at 82% 12%,var(--glow-b),transparent 70%)}
+.thesis em{background:linear-gradient(92deg,var(--pass) 10%,var(--link) 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-photo img{border-radius:var(--r-lg);border:1px solid var(--rule);box-shadow:0 0 0 5px var(--card),0 0 0 6px var(--rule),var(--shadow)}
+.authblock{border-radius:var(--r-lg);box-shadow:var(--shadow)}
+.auth-head{align-items:center;justify-content:flex-start;background:linear-gradient(var(--card),var(--paper) 260%)}
+.auth-head .auth-title{flex:1}
+.dots{display:inline-flex;gap:6px;margin-right:6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#FF5F57}
+.dots i:nth-child(2){background:#FEBC2E}.dots i:nth-child(3){background:#28C840}
+.auth-row{padding:7px 10px;margin:0 -10px;border-radius:8px}
+.auth-key .verdict:not(.pending)::after{content:"✓";margin-left:5px;font-size:.85em;opacity:.8}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.stat{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-md);padding:14px 16px;box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--mono);font-size:24px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.stat span{display:block;font-size:12.5px;line-height:1.4;color:var(--ink-3);margin-top:2px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* nav */
+.navlinks{gap:2px}
+.navlinks a{padding:4px 9px;border-radius:999px;border-bottom:0}
+.navlinks a:hover{background:var(--pass-bg);color:var(--pass);border-bottom:0}
+.navlinks a.active{background:var(--ink);color:var(--paper);border-bottom:0}
+.theme-btn,.rerun{border-radius:999px;padding:4px 12px}
+
+/* section labels get an index: 01 / About */
+main{counter-reset:sec}
+.sect-label{border-bottom:0;padding-bottom:0;margin-bottom:26px;align-items:center}
+.sect-label::before{counter-increment:sec;content:"0" counter(sec);font-weight:600;color:var(--pass);margin-right:12px;letter-spacing:.04em}
+.sect-label::after{content:"";flex:1;height:1px;background:var(--rule);order:1;margin:0 4px 0 14px}
+.sect-label span{order:2}
+
+/* project cards */
+.project{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-lg);padding:30px 32px 26px;margin-bottom:22px;
+  position:relative;overflow:hidden;box-shadow:var(--shadow);transition:border-color .2s}
+.project:last-child{margin-bottom:0;padding-bottom:26px;border-bottom:1px solid var(--rule)}
+.project::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--accent),transparent 75%)}
+.project:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--rule))}
+.project[data-tags^="fullstack"]{--accent:var(--link)}
+.project .lab,.project .decision{background:var(--paper)}
+.project .lab textarea{background:var(--card)}
+.lab{border-radius:var(--r-md);max-width:none}
+.lab-head{background:var(--card)}
+.decision{border-radius:var(--r-md);border-left-color:var(--accent);max-width:none}
+.decision-label{color:var(--accent)}
+.chip{border-radius:999px;padding:3px 10px;background:var(--paper)}
+.repo-link{border-radius:999px;padding:4px 12px}
+.status-pill{border-radius:999px}
+.lab-btns button{border-radius:999px;padding:6px 14px}
+.vtog{border-radius:6px}
+.lab-meter{border-radius:999px;overflow:hidden}
+.lab-meter .fill{border-radius:999px}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.demo-frame{border-radius:var(--r-md)}
+
+/* experience timeline */
+#experience .role{position:relative;padding-left:30px;border-bottom:0;margin-bottom:0;padding-bottom:30px}
+#experience .role::before{content:"";position:absolute;left:5px;top:12px;bottom:-12px;width:1px;background:var(--rule)}
+#experience .role:last-child::before{display:none}
+#experience .role::after{content:"";position:absolute;left:0;top:6px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-3)}
+#experience .role:has(.live-dot)::after{border-color:var(--pass);background:var(--pass);box-shadow:0 0 0 4px var(--pass-bg)}
+.role-title{font-size:16.5px}
+
+/* credentials */
+.cred{gap:18px}
+.cred-col{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 22px 12px;box-shadow:var(--shadow)}
+.doc{border-radius:var(--r-md)}
+
+/* contact */
+.contact-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--rule);border-radius:var(--r-lg);padding:34px 34px 30px;box-shadow:var(--shadow)}
+.contact-card::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(420px 200px at 100% 0%,var(--glow-b),transparent 70%),radial-gradient(420px 220px at 0% 100%,var(--glow-a),transparent 70%)}
+.contact-card>*{position:relative}
+.clink{border-radius:999px;padding:9px 16px}
+.contact-links .clink:first-child{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.contact-links .clink:first-child:hover{color:var(--paper);opacity:.9}
+
+/* decoy demo (Canary) */
+.file-list{list-style:none;margin:12px 0 8px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
+.file-list li{font-size:12px;padding:6px 9px;border:1px solid var(--rule);border-radius:6px;background:var(--card);display:flex;justify-content:space-between;gap:8px;transition:background .25s,border-color .25s,color .25s}
+.file-list li .st{color:var(--ink-3)}
+.file-list li.decoy{border-style:dashed}
+.file-list li.decoy .nm{color:var(--pass)}
+.file-list li.enc{color:var(--fail);border-color:var(--fail);background:color-mix(in srgb,var(--fail) 8%,var(--card))}
+.file-list li.enc .nm{text-decoration:line-through}
+.file-list li.trip{animation:trip .9s}
+@keyframes trip{30%{box-shadow:0 0 0 6px color-mix(in srgb,var(--fail) 25%,transparent)}}
+#decoyToggle[aria-pressed="true"]{color:#fff;background:var(--pass);border-color:var(--pass);border-style:solid}
+:root[data-theme="dark"] #decoyToggle[aria-pressed="true"]{color:#0E141B}
+
+html,body{overflow-x:clip}  /* the hero glow extends past the edges on purpose */
+@media(max-width:560px){.project{padding:24px 20px 20px}.contact-card{padding:26px 22px}
+  .navlinks{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}.navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{white-space:nowrap;padding:4px 6px}}
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';
@@ -520,7 +630,8 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
 
     <div class="authblock" id="authblock">
       <div class="auth-head">
-        <span>Authentication-Results</span>
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="auth-title">Authentication-Results</span>
         <span>akshithreddysheri</span>
       </div>
       <div class="auth-body">
@@ -542,6 +653,13 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
         </div>
       </div>
       <div class="auth-foot"><span>Every claim on this page is checkable. Links go to the source.</span><button type="button" class="rerun" id="rerun">↻ re-run checks</button></div>
+    </div>
+
+    <div class="stats" aria-label="At a glance">
+      <div class="stat"><b data-count="5">5</b><span>projects shipped end to end</span></div>
+      <div class="stat"><b data-count="248">248</b><span>tests across my own repos</span></div>
+      <div class="stat"><b>1st</b><span>Texas A&amp;M &times; Salesforce Challenge</span></div>
+      <div class="stat"><b>Top 1%</b><span>National Cyber Scholar 2024</span></div>
     </div>
   </div>
 
@@ -651,7 +769,8 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="writeup">
         <p>Built solo in 48 hours for The Zerops Challenge, a WeMakeDevs hackathon. The vision layer uses Claude Haiku 4.5 to pull structured inventory data out of ordinary phone photos — the hard part isn't recognizing food, it's turning a cluttered shelf into rows a database can reason about.</p>
         <p>On top of that sits a recipe-matching and meal-planning engine covering a 38-recipe catalog, with an urgency-aware greedy scheduler that pushes ingredients closest to spoiling into earlier meals.</p>
-        <p>Missing an ingredient doesn't always mean a trip to the store, so matching is substitution-aware: olive oil can stand in for butter, lime for lemon, shallots for onion. A recipe whose every gap is covered is marked "ready with swaps" and ranked first. Each swap is re-checked against your dietary restrictions with the swap applied (a dairy-free cook is never told to use cream), and the meal planner counts swapped ingredients as already owned. 19 unit tests cover it, including the matcher end to end against an in-memory database stand-in.</p>
+        <p>Missing an ingredient doesn't always mean a trip to the store, so matching is substitution-aware: olive oil can stand in for butter, lime for lemon, shallots for onion. A recipe whose every gap is covered is marked "ready with swaps" and ranked first. Each swap is re-checked against your dietary restrictions with the swap applied (a dairy-free cook is never told to use cream), and the meal planner counts swapped ingredients as already owned.</p>
+        <p>Expiry dates drive "use it soon", the planner's urgency order, and "what should I cook right now", so they need to be right. They used to be one number per category: chicken and eggs both got three days. Each item now gets its own estimate from a table of about 120 foods (chicken 2 days, eggs 28, garlic 90), matched on whole words with the most specific term winning, so <code>peanut butter</code> isn't butter and <code>coconut milk</code> isn't milk. Frozen anything gets 90 days. The same table sorts the shopping list by store aisle. 26 unit tests cover it, including the matcher end to end against an in-memory database stand-in.</p>
         <p>The backend runs as a two-service dev/stage pipeline on Zerops, with database migrations that apply atomically and automatically on every deploy. I drove the whole build-deploy-debug loop through Claude Code and Zerops' control-plane tooling, debugging against live logs rather than clicking through a cloud console.</p>
       </div>
       <div class="decision">
@@ -675,14 +794,14 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="proj-top">
         <h2 class="proj-name">Canary</h2>
         <div class="proj-top-right">
-          <div class="proj-meta">Sep 2026 · personal project · 47 tests</div>
+          <div class="proj-meta">Sep 2026 · personal project · 61 tests</div>
           <a class="repo-link" href="https://github.com/arsheri07/canary" target="_blank" rel="noopener">github.com/arsheri07/canary</a>
         </div>
       </div>
       <p class="proj-line">A file integrity monitor that tells the difference between you editing a file and ransomware encrypting it.</p>
       <div class="stack">
         <span class="chip">Python</span><span class="chip">SHA-256</span><span class="chip">Shannon entropy</span>
-        <span class="chip">HMAC-SHA256</span><span class="chip">Linux</span><span class="chip">CLI</span>
+        <span class="chip">HMAC-SHA256</span><span class="chip">Decoy files</span><span class="chip">Linux</span><span class="chip">CLI</span>
       </div>
       <div class="lab" data-lab="entropy">
         <div class="lab-head"><span>try it · entropy check</span><span>canary --scan</span></div>
@@ -695,11 +814,21 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
           <div class="lab-btns"><button type="button" id="entEncrypt">encrypt it</button><button type="button" id="entReset" class="ghost">reset</button></div>
         </div>
       </div>
+      <div class="lab" data-lab="decoy">
+        <div class="lab-head"><span>try it · decoy files</span><span>canary plant ~/Documents</span></div>
+        <div class="lab-body">
+          <div class="pick"><button type="button" class="vtog" id="decoyToggle" aria-pressed="true">decoys planted</button></div>
+          <ol class="file-list" id="decoyFiles" aria-live="polite"></ol>
+          <div class="lab-out" aria-live="polite">risk=<b id="decoyScore">0</b>/100 verdict=<b id="decoyVerdict" class="verdict">normal</b> <span id="decoyNote"></span></div>
+          <div class="lab-btns"><button type="button" id="decoyRun">run ransomware</button><button type="button" id="decoyReset" class="ghost">reset</button></div>
+        </div>
+      </div>
       <div class="writeup">
         <p>Point it at a folder and it fingerprints every file with SHA-256. Run it again later and it tells you exactly what was added, modified, or deleted. File integrity monitoring is a required control under PCI-DSS 11.5 and CIS Control 3 — Tripwire and OSSEC are the commercial versions of this idea.</p>
         <p>The harder problem is interpretation. Forty files changing could be a build finishing, or it could be ransomware working through your documents. Six signals contribute to a score, because any one of them has an innocent explanation and almost nothing legitimate produces several at once.</p>
         <p>Ransomware doesn't announce itself, but it does have to encrypt. That's the property this leans on: encryption is designed to produce output indistinguishable from noise, and noise looks measurably different from English text.</p>
-        <p>The monitor also has to protect itself. Every verdict is "compared to the baseline," so the baseline is what an attacker would edit: encrypt a file, write its new hash into the snapshot, and nothing looks wrong. Each snapshot is signed with HMAC-SHA256 under a private key, checked in constant time on every scan; an edited baseline is refused outright. Ignore patterns (<code>.canaryignore</code>) are frozen inside that signature, so adding <code>*.docx</code> to the ignore file can't blind it either. 47 tests, including ones that attack Canary's own baseline, run in CI on Linux and macOS.</p>
+        <p>The monitor also has to protect itself. Every verdict is "compared to the baseline," so the baseline is what an attacker would edit: encrypt a file, write its new hash into the snapshot, and nothing looks wrong. Each snapshot is signed with HMAC-SHA256 under a private key, checked in constant time on every scan; an edited baseline is refused outright. Ignore patterns (<code>.canaryignore</code>) are frozen inside that signature, so adding <code>*.docx</code> to the ignore file can't blind it either. </p>
+        <p>The statistical signals need damage to pile up before they can tell an attack from a busy afternoon. Decoy files need none. <code>canary plant</code> writes files like <code>!_Passwords_backup.txt</code> that look worth encrypting, sort ahead of real files so a folder walker reaches them first, and that nothing legitimate ever opens. One encrypted decoy is CRITICAL on its own. The decoy list lives inside the signed baseline, so malware can't quietly retire one first, and <code>watch --on-alert</code> runs a notification command once per escalation, without a shell. 61 tests, including ones that attack Canary's own baseline, run in CI on Linux and macOS.</p>
       </div>
       <div class="decision">
         <div class="decision-label">The decision</div>
@@ -712,7 +841,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <div class="proj-top">
         <h2 class="proj-name">Phishing Risk Analyzer</h2>
         <div class="proj-top-right">
-          <div class="proj-meta">Aug 2026 · personal project · 101 tests</div>
+          <div class="proj-meta">Aug 2026 · personal project · 118 tests</div>
           <a class="repo-link" href="https://github.com/arsheri07/phishing-risk-analyzer" target="_blank" rel="noopener">github.com/arsheri07/phishing-risk-analyzer</a>
           <a class="repo-link" href="https://phishing-risk-analyzer-suk0.onrender.com" target="_blank" rel="noopener">live demo</a>
         </div>
@@ -720,18 +849,20 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <p class="proj-line">One risk-scoring engine that reviews emails, websites, texts, call transcripts, and app listings through real email authentication, not pattern matching.</p>
       <div class="stack">
         <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">SPF/DKIM/DMARC</span>
-        <span class="chip">IDN homographs</span><span class="chip">pytest</span>
+        <span class="chip">IDN homographs</span><span class="chip">Attachment analysis</span><span class="chip">pytest</span>
       </div>
       <div class="lab" data-lab="mail">
         <div class="lab-head"><span>try it · score an email</span><span>click a verdict to flip it</span></div>
         <div class="lab-body">
-          <div class="mail-hdr"><span class="lab-k">from:</span> <span id="mailFrom">billing@northbank.com</span><br><span class="lab-k">subject:</span> Your statement is ready</div>
+          <div class="mail-hdr"><span class="lab-k">from:</span> <span id="mailFrom">billing@northbank.com</span><br><span class="lab-k">subject:</span> Your statement is ready<br><span class="lab-k">attached:</span> <span id="mailAttach">statement.pdf</span></div>
           <div class="mail-rows">
             <div>spf=<button type="button" class="vtog" data-k="spf" aria-pressed="true">pass</button></div>
             <div>dkim=<button type="button" class="vtog" data-k="dkim" aria-pressed="true">pass</button></div>
             <div>dmarc=<button type="button" class="vtog" data-k="dmarc" aria-pressed="true">pass</button></div>
             <div>lookalike_domain=<button type="button" class="vtog" data-k="look" aria-pressed="false">no</button></div>
             <div>homograph=<button type="button" class="vtog" data-k="homo" aria-pressed="false">no</button></div>
+            <div>fake_display_name=<button type="button" class="vtog" data-k="disp" aria-pressed="false">no</button></div>
+            <div>double_extension=<button type="button" class="vtog" data-k="att" aria-pressed="false">no</button></div>
           </div>
           <div class="lab-meter" aria-hidden="true"><div class="fill" id="mailBar"></div></div>
           <div class="lab-out" aria-live="polite">risk=<b id="mailScore">0</b>/100 verdict=<b id="mailVerdict" class="verdict">low</b> <span id="mailWhy"></span></div>
@@ -741,7 +872,8 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
         <p>Most consumer scam detectors work by pattern-matching sender names and obvious red flags — easy to build, easy for an attacker to route around with a lookalike domain. Phishing Risk Analyzer does the actual protocol verification instead: SPF, DKIM, and DMARC checks, including real DKIM signature validation against the sending domain's published public key in DNS.</p>
         <p>That verification answers one specific question — does this message genuinely come from the domain it claims to? It doesn't answer whether that domain deserves your trust, which is why lookalike-domain detection runs as a separate layer on top.</p>
         <p>The hardest lookalikes aren't misspellings. <code>nоrthbank.com</code> with a Cyrillic <code>о</code> renders identically, travels as punycode, and passes SPF, DKIM and DMARC, because the attacker really does own it. Every link domain is decoded and reduced to a confusable skeleton (the Unicode TR39 idea browsers use), then matched against the brand list exactly. It also flags links whose visible text names one site while the href opens another. Building it exposed a real bug: Python's email parser was turning non-ASCII body text into <code>\u</code> escapes, so the lookalike letter never reached the detector at all.</p>
-        <p>Built independently: the Flask REST API, the scoring engine, and the interface (including a session case log and plain-text reports for IT tickets), backed by 101 pytest tests.</p>
+        <p>Authentication also can't see two places lures hide. The display name ("Microsoft 365") is free text nothing verifies, so a brand name over an unrelated address scores on its own; matching is whole-word, so "Study Groups" never trips UPS. Attachments are judged by name only, never opened: <code>Mailbox_Restore.pdf.exe</code>, a right-to-left override that makes <code>.exe</code> display as <code>.pdf</code>, disk images, macro documents and HTML sign-in pages. A sample with SPF, DKIM and DMARC all passing still scores DANGEROUS.</p>
+        <p>Built independently: the Flask REST API, the scoring engine, and the interface (including a session case log and plain-text reports for IT tickets), backed by 118 pytest tests.</p>
       </div>
       <div class="decision">
         <div class="decision-label">The decision</div>
@@ -916,6 +1048,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
   <!-- ================= CONTACT ================= -->
   <section class="contact" id="contact">
     <div class="sect-label">Contact</div>
+    <div class="contact-card">
     <p class="contact-line">Open to Summer 2027 internships and Fall/Spring co-ops in security, IT, and software engineering.</p>
     <div class="contact-links">
       <a class="clink" href="mailto:akshithreddysheri@gmail.com">akshithreddysheri@gmail.com</a>
@@ -923,6 +1056,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
       <a class="clink" href="https://github.com/arsheri07?tab=repositories" target="_blank" rel="noopener">github.com/arsheri07</a>
       <a class="clink" href="tel:5126496884">512-649-6884</a>
       <button class="clink copy" type="button" id="copyEmail">copy email</button>
+    </div>
     </div>
   </section>
 
@@ -1224,10 +1358,14 @@ document.querySelectorAll('.doc img').forEach(function(im){
     function render(){var s=0,r=[];
       if(!on('spf')){s+=25;r.push('SPF failed');}if(!on('dkim')){s+=30;r.push('DKIM failed');}if(!on('dmarc')){s+=25;r.push('DMARC failed');}
       var look=on('look');if(look){s+=35;r.push('the domain imitates a real bank');}
-      var homo=on('homo');if(homo){s+=40;r.push('a Cyrillic \u043e is posing as an o, so the authentication checks pass for the fake domain');}s=Math.min(100,s);
+      var homo=on('homo');if(homo){s+=40;r.push('a Cyrillic \u043e is posing as an o, so the authentication checks pass for the fake domain');}
+      var disp=on('disp');if(disp){s+=25;r.push('the display name says Northbank but the address is on another domain');}
+      var att=on('att');if(att){s+=40;r.push('the attachment is a program dressed up as a PDF');}s=Math.min(100,s);
       btns.forEach(function(b){var k=b.dataset.k,p=b.getAttribute('aria-pressed')==='true';
-        if(k==='look'||k==='homo'){b.textContent=p?'yes':'no';b.classList.toggle('bad',p);}else{b.textContent=p?'pass':'fail';b.classList.toggle('bad',!p);}});
-      from.textContent=look?'billing@n0rthbank-secure.com':(homo?'billing@n\u043erthbank.com':'billing@northbank.com');
+        if(k==='look'||k==='homo'||k==='disp'||k==='att'){b.textContent=p?'yes':'no';b.classList.toggle('bad',p);}else{b.textContent=p?'pass':'fail';b.classList.toggle('bad',!p);}});
+      var addr=look?'billing@n0rthbank-secure.com':(homo?'billing@n\u043erthbank.com':(disp?'alerts@nb-mailer77.net':'billing@northbank.com'));
+      from.textContent=disp?'Northbank Billing <'+addr+'>':addr;
+      var at=document.getElementById('mailAttach');if(at)at.textContent=att?'statement.pdf.exe':'statement.pdf';
       score.textContent=s;bar.style.width=s+'%';bar.classList.toggle('hot',s>=30);
       ver.textContent=s>=60?'high':(s>=30?'suspicious':'low');ver.classList.toggle('bad',s>=30);
       why.textContent=r.length?'— '+(r.length>1?r.slice(0,-1).join(', ')+' and '+r[r.length-1]:r[0]):'— every check passed';}
@@ -1314,8 +1452,61 @@ document.querySelectorAll('.doc img').forEach(function(im){
       else if(e.key==='Enter'){e.preventDefault();if(shown[sel])go(shown[sel]);}
       else if(e.key==='Escape'){close();}});
     document.addEventListener('keydown',function(e){var typing=/input|textarea|select/i.test(e.target.tagName||'');
-      if(!typing&&e.key==='/'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();open();}
+      if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){e.preventDefault();box.classList.contains('open')?close():open();}
+      else if(!typing&&e.key==='/'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();open();}
       else if(e.key==='Escape'&&box.classList.contains('open'))close();});})();
+})();
+</script>
+<script>
+/* ---------- v8: Canary decoy demo, stat counters ---------- */
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s){return document.querySelector(s);}
+
+  // Canary decoys: a folder walker encrypts files in name order. With decoys
+  // planted, it reaches a "!_" file first; one encrypted decoy scores 50+25
+  // (CRITICAL) by itself, the same rule as detect.py signal 7. Without them,
+  // only the entropy signal fires (3+ files: 25 points, SUSPICIOUS) and every
+  // file is gone before anything looks critical.
+  (function(){var ul=$('#decoyFiles');if(!ul)return;
+    var tog=$('#decoyToggle'),run=$('#decoyRun'),rst=$('#decoyReset'),sc=$('#decoyScore'),vd=$('#decoyVerdict'),note=$('#decoyNote');
+    var real=['budget.txt','essay_draft.txt','lease.txt','notes.txt','recipes.txt','resume.txt','taxes_2025.txt'];
+    var decoys=['!_Bank_statements_2026.txt','!_Passwords_backup.txt'];
+    var timer=null,files=[];
+    function label(n){return n>=70?'critical':n>=40?'high':n>=20?'suspicious':'normal';}
+    function build(){clearTimeout(timer);timer=null;run.disabled=false;
+      var planted=tog.getAttribute('aria-pressed')==='true';
+      tog.textContent=planted?'decoys planted':'no decoys';
+      files=(planted?decoys:[]).concat(real).sort().map(function(n){return {n:n,decoy:n.indexOf('!_')===0,enc:false};});
+      ul.innerHTML='';files.forEach(function(f){var li=document.createElement('li');li.className=f.decoy?'decoy':'';
+        li.innerHTML='<span class="nm"></span><span class="st"></span>';li.firstChild.textContent=f.n;li.lastChild.textContent=f.decoy?'decoy':'ok';f.el=li;ul.appendChild(li);});
+      show(0,planted?'two decoys sort first, before your real files':'only real files: Canary has to wait for the damage to add up');}
+    function show(n,msg){sc.textContent=n;var l=label(n);vd.textContent=l;vd.classList.toggle('bad',n>=20);note.textContent=msg?'— '+msg:'';}
+    function score(){var encReal=files.filter(function(f){return f.enc&&!f.decoy;}).length,n=0;
+      if(encReal>=10)n+=40;else if(encReal>=3)n+=25;
+      if(files.some(function(f){return f.enc&&f.decoy;}))n+=75;return Math.min(100,n);}
+    function step(i){
+      if(i>=files.length){var n=score();show(n,'all '+real.length+' real files encrypted; too few for the volume signals to say CRITICAL');run.disabled=false;return;}
+      var f=files[i];f.enc=true;f.el.classList.add('enc');f.el.lastChild.textContent='encrypted';
+      var n=score();
+      if(n>=70){f.el.classList.add('trip');
+        var safe=files.filter(function(x){return !x.enc&&!x.decoy;}).length;
+        show(n,'decoy touched after '+(i+1)+' file. '+safe+' of '+real.length+' real files untouched (demo checks after every file; the CLI checks every --interval)');
+        run.disabled=false;return;}
+      show(n,'encrypting '+f.n+'…');
+      timer=setTimeout(function(){step(i+1);},reduce?0:420);}
+    run.addEventListener('click',function(){build();run.disabled=true;step(0);});
+    rst.addEventListener('click',build);
+    tog.addEventListener('click',function(){tog.setAttribute('aria-pressed',tog.getAttribute('aria-pressed')==='true'?'false':'true');build();});
+    build();})();
+
+  // stat tiles count up once when they scroll into view
+  (function(){var els=[].slice.call(document.querySelectorAll('.stat b[data-count]'));
+    if(reduce||!els.length||!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;io.unobserve(en.target);
+      var b=en.target,to=+b.dataset.count,t0=performance.now();
+      (function tick(t){var p=Math.min(1,(t-t0)/900);b.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick);})(t0);});},{threshold:.6});
+    els.forEach(function(b){io.observe(b);});})();
 })();
 </script>
 </body>

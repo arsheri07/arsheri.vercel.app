@@ -3,6 +3,12 @@
 Live at https://arsheri.vercel.app (Vercel deploys every push to `main`).
 
 ## 2026-11-26
+- **Visual refresh.** Hero Authentication-Results block styled as a terminal window with an ambient glow and gradient headline; new stats strip (5 projects, 248 tests across own repos, 1st place, top 1%) with count-up; numbered section labels; projects as rounded cards with a per-track accent bar (security green, full-stack blue); pill chips and buttons; experience as a timeline (current roles filled); credentials as cards; contact as a call-to-action card. Subtle dot-grid background. Light and dark both checked.
+- **Canary:** 61 tests (was 47), "Decoy files" chip, write-up paragraph on decoys and `--on-alert`, and a new decoy-file demo.
+- **Phishing Risk Analyzer:** 118 tests (was 101), "Attachment analysis" chip, write-up paragraph on display-name impersonation and risky attachments; the email demo gains `fake_display_name` and `double_extension` toggles and shows the attachment.
+- **KitchenSense:** 26 tests (was 19), write-up paragraph on per-food shelf life and the by-aisle shopping list, `node:test` chip.
+- Fixed: the selected project filter was white-on-white in dark mode.
+- Fixed: Ctrl/Cmd+K now opens quick jump (the README already said it did).
 - Admitted to the Cybersecurity minor: replaced "hoping to add" wording in the intro, meta descriptions, summary card and Education list with "Cybersecurity minor (in progress)".
 
 ## 2026-11-25
