@@ -2,6 +2,13 @@
 
 Live at https://arsheri.vercel.app (Vercel deploys every push to `main`).
 
+## 2026-11-26 (evening)
+- **Security headers:** strict Content-Security-Policy and friends via `vercel.json`. To make `script-src 'self'` possible, the five inline scripts moved to `js/` (theme, checks, labs, planner, decoy) and the headshot's inline `onerror` became a listener.
+- **Fixed:** the Credential Leak Scanner demo built its findings list with `innerHTML` from text typed into the box; it now uses `textContent`.
+- **Fixed:** long decoy file names pushed the "encrypted" tag out of its tile; names now truncate with an ellipsis (full name on hover).
+- Added `favicon.svg` (a pass check), `robots.txt`, `sitemap.xml`, canonical URL, Open Graph image, theme color and schema.org Person data.
+- Tested in headless Chrome with the CSP enforced: all four checks resolve, every demo runs, no console errors or CSP violations, light and dark.
+
 ## 2026-11-26
 - **Visual refresh.** Hero Authentication-Results block styled as a terminal window with an ambient glow and gradient headline; new stats strip (5 projects, 248 tests across own repos, 1st place, top 1%) with count-up; numbered section labels; projects as rounded cards with a per-track accent bar (security green, full-stack blue); pill chips and buttons; experience as a timeline (current roles filled); credentials as cards; contact as a call-to-action card. Subtle dot-grid background. Light and dark both checked.
 - **Canary:** 61 tests (was 47), "Decoy files" chip, write-up paragraph on decoys and `--on-alert`, and a new decoy-file demo.

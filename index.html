@@ -9,6 +9,17 @@
 <meta property="og:description" content="Cybersecurity and software engineering. Computer Science student at Texas A&amp;M with a Cybersecurity minor in progress.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arsheri.vercel.app">
+<meta property="og:image" content="https://arsheri.vercel.app/images/headshot.jpg">
+<meta property="og:image:alt" content="Akshithreddy Sheri">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0F1620">
+<link rel="canonical" href="https://arsheri.vercel.app/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Akshithreddy Sheri","url":"https://arsheri.vercel.app/","image":"https://arsheri.vercel.app/images/headshot.jpg",
+ "affiliation":{"@type":"CollegeOrUniversity","name":"Texas A&M University"},"knowsAbout":["Cybersecurity","Software engineering"],
+ "sameAs":["https://github.com/arsheri07","https://www.linkedin.com/in/akshithreddy-sheri"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -565,7 +576,8 @@ main{counter-reset:sec}
 /* decoy demo (Canary) */
 .file-list{list-style:none;margin:12px 0 8px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
 .file-list li{font-size:12px;padding:6px 9px;border:1px solid var(--rule);border-radius:6px;background:var(--card);display:flex;justify-content:space-between;gap:8px;transition:background .25s,border-color .25s,color .25s}
-.file-list li .st{color:var(--ink-3)}
+.file-list li .st{color:var(--ink-3);flex:none}
+.file-list li .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-list li.decoy{border-style:dashed}
 .file-list li.decoy .nm{color:var(--pass)}
 .file-list li.enc{color:var(--fail);border-color:var(--fail);background:color-mix(in srgb,var(--fail) 8%,var(--card))}
@@ -580,10 +592,7 @@ html,body{overflow-x:clip}  /* the hero glow extends past the edges on purpose *
   .navlinks{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}.navlinks::-webkit-scrollbar{display:none}
   .navlinks a{white-space:nowrap;padding:4px 6px}}
 </style>
-<script>
-(function(){try{var t=localStorage.getItem('theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';
-if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();
-</script>
+<script src="js/theme.js"></script>
 </head>
 <body>
 
@@ -625,7 +634,7 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
     <p class="thesis-sub">Computer Science student at Texas A&amp;M with a Cybersecurity minor in progress.</p>
 
       </div>
-      <figure class="hero-photo"><img src="images/headshot.jpg" alt="Akshithreddy Sheri" onerror="this.closest('figure').remove()"></figure>
+      <figure class="hero-photo"><img src="images/headshot.jpg" alt="Akshithreddy Sheri" id="headshot"></figure>
     </div>
 
     <div class="authblock" id="authblock">
@@ -1069,445 +1078,9 @@ if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(
   </div>
 </footer>
 
-<script>
-// Resolve the Authentication-Results block on load: each check flips
-// from pending to pass in sequence. Mirrors how a real verifier reports.
-(function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var rows = document.querySelectorAll('[data-verdict]');
-  if (reduce) {
-    rows.forEach(function(r){ r.textContent = 'pass'; r.classList.remove('pending'); });
-    return;
-  }
-  rows.forEach(function(r, i){
-    setTimeout(function(){
-      r.textContent = 'pass';
-      r.classList.remove('pending');
-    }, 420 + i * 260);
-  });
-})();
-
-
-// ---------- document lightbox ----------
-(function(){
-  const lb = document.getElementById('lb');
-  if (!lb) return;
-  const img = document.getElementById('lbImg');
-  const cap = document.getElementById('lbCap');
-  let lastFocus = null;
-
-  function open(src, caption, trigger){
-    lastFocus = trigger;
-    img.src = src;
-    img.alt = caption;
-    cap.textContent = caption;
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('lbClose').focus();
-  }
-  function close(){
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    img.src = '';
-    if (lastFocus) lastFocus.focus();
-  }
-
-  document.querySelectorAll('.doc').forEach(function(b){
-    b.addEventListener('click', function(){
-      open(b.dataset.src, b.dataset.caption, b);
-    });
-  });
-
-  document.getElementById('lbClose').addEventListener('click', close);
-  // clicking the backdrop closes; clicking the image itself does not
-  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && lb.classList.contains('open')) close();
-  });
-})();
-
-// A missing document file shouldn't leave a broken image icon on the page -
-// hide the whole card instead, so the section degrades cleanly.
-document.querySelectorAll('.doc img').forEach(function(im){
-  im.addEventListener('error', function(){
-    const card = im.closest('.doc');
-    if (card) card.style.display = 'none';
-  });
-});
-
-// ================= interactive layer =================
-(function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function go(id){var t=document.getElementById(id);if(!t)return;
-    t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
-    t.classList.remove('spot');void t.offsetWidth;t.classList.add('spot');}
-
-  // 1) reading progress + active nav link
-  var bar=document.getElementById('progressBar');
-  var links=[].slice.call(document.querySelectorAll('.navlinks a[href^="#"]'));
-  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
-  function onScroll(){
-    var h=document.documentElement,max=h.scrollHeight-h.clientHeight;
-    if(bar)bar.style.width=(max>0?h.scrollTop/max*100:0)+'%';
-    var cur=-1;secs.forEach(function(sec,i){if(sec&&sec.getBoundingClientRect().top<140)cur=i;});
-    links.forEach(function(a,i){a.classList.toggle('active',i===cur);});
-  }
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-
-  // 2) hero rows jump to their section
-  var map={education:'credentials',shipped:'work',experience:'experience',credentials:'credentials'};
-  document.querySelectorAll('.auth-row').forEach(function(r){
-    var k=(r.querySelector('.auth-key')||{}).textContent||'';k=k.split('=')[0].trim();
-    if(!map[k])return;
-    r.classList.add('is-link');r.tabIndex=0;r.setAttribute('role','link');
-    r.setAttribute('aria-label','Go to '+map[k]);
-    r.addEventListener('click',function(){go(map[k]);});
-    r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(map[k]);}});
-  });
-
-  // 3) project filters
-  var projects=[].slice.call(document.querySelectorAll('.project[data-tags]'));
-  var workLabel=document.querySelector('#work .sect-label');
-  if(projects.length&&workLabel){
-    var opts=[['all','All'],['security','Security'],['fullstack','Full-stack'],['ai','AI']];
-    var bar2=document.createElement('div');bar2.className='filters';bar2.setAttribute('role','group');bar2.setAttribute('aria-label','Filter projects');
-    opts.forEach(function(o){
-      var n=o[0]==='all'?projects.length:projects.filter(function(p){return p.dataset.tags.split(' ').indexOf(o[0])>-1;}).length;
-      var b=document.createElement('button');b.type='button';b.className='fbtn';b.dataset.f=o[0];
-      b.setAttribute('aria-pressed',o[0]==='all'?'true':'false');b.innerHTML=o[1]+'<span class="n">'+n+'</span>';
-      b.addEventListener('click',function(){
-        bar2.querySelectorAll('.fbtn').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
-        projects.forEach(function(p){
-          var show=o[0]==='all'||p.dataset.tags.split(' ').indexOf(o[0])>-1;
-          var was=!p.classList.contains('filtered-out');
-          p.classList.toggle('filtered-out',!show);
-          if(show&&!was){p.classList.remove('fade-in');void p.offsetWidth;p.classList.add('fade-in');}
-        });
-      });
-      bar2.appendChild(b);
-    });
-    workLabel.insertAdjacentElement('afterend',bar2);
-  }
-
-  // 4) project write-ups: decision stays visible, the long write-up + walkthrough fold away
-  projects.forEach(function(p,idx){
-    var w=p.querySelector('.writeup'),d=p.querySelector('.decision'),demo=p.querySelector('.demo');
-    if(!w)return;
-    if(d)w.parentNode.insertBefore(d,w);
-    var wrap=document.createElement('div');wrap.className='collapsible';wrap.id='more-'+p.id;
-    var inner=document.createElement('div');wrap.appendChild(inner);
-    w.parentNode.insertBefore(wrap,w);inner.appendChild(w);if(demo)inner.appendChild(demo);
-    var btn=document.createElement('button');btn.type='button';btn.className='more-btn';
-    btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-controls',wrap.id);
-    var label=demo?'Read the full write-up + walkthrough':'Read the full write-up';
-    btn.innerHTML='<span class="t">'+label+'</span><span class="chev">↓</span>';
-    wrap.parentNode.insertBefore(btn,wrap);
-    btn.addEventListener('click',function(){
-      var open=wrap.classList.toggle('open');btn.setAttribute('aria-expanded',open);
-      btn.querySelector('.t').textContent=open?'Show less':label;
-    });
-  });
-
-  // 5) experience: first two bullets visible, rest on demand
-  var roles=[].slice.call(document.querySelectorAll('#experience .role'));
-  var toggles=[];
-  roles.forEach(function(r){
-    var lis=r.querySelectorAll('ul li');if(lis.length<=3)return;
-    for(var i=2;i<lis.length;i++)lis[i].classList.add('extra');
-    var b=document.createElement('button');b.type='button';b.className='more-btn';b.setAttribute('aria-expanded','false');
-    var more='+'+(lis.length-2)+' more';
-    b.innerHTML='<span class="t">'+more+'</span><span class="chev">↓</span>';
-    r.querySelector('ul').insertAdjacentElement('afterend',b);
-    function set(open){r.classList.toggle('expanded',open);b.setAttribute('aria-expanded',open);b.querySelector('.t').textContent=open?'Show less':more;}
-    b.addEventListener('click',function(){set(!r.classList.contains('expanded'));});
-    toggles.push(set);
-  });
-  var expLabel=document.querySelector('#experience .sect-label span');
-  if(expLabel&&toggles.length){
-    var all=document.createElement('button');all.type='button';all.className='mini-btn';all.textContent='expand all';
-    var on=false;all.addEventListener('click',function(){on=!on;toggles.forEach(function(t){t(on);});all.textContent=on?'collapse all':'expand all';});
-    expLabel.textContent='';expLabel.appendChild(all);
-  }
-
-  // 6) skills: click one to see where it was used
-  var used={
-    'Python':['credential-leak-scanner','canary','phishing-risk-analyzer','aa-role'],'JavaScript':['kitchensense'],'TypeScript':['kitchensense'],'SQL':['kitchensense'],'Linux':['canary','kitchensense'],
-    'Pandas':['aa-role'],'NumPy':['aa-role'],'time-series forecasting':['aa-role'],'regression':['aa-role'],
-    'Node.js':['kitchensense'],'Flask':['phishing-risk-analyzer'],'PostgreSQL':['kitchensense'],'REST APIs':['kitchensense'],'Zerops':['kitchensense'],
-    'Cryptography':['canary','phishing-risk-analyzer'],'Regex':['credential-leak-scanner'],'SPF/DKIM/DMARC':['phishing-risk-analyzer'],
-    'Claude API':['kitchensense'],'Claude Code':['kitchensense'],'Git':['credential-leak-scanner','kitchensense','canary'],'Salesforce':['hhs']
-  };
-  var techCol=[].slice.call(document.querySelectorAll('.cred-col')).filter(function(c){var h=c.querySelector('h3');return h&&/Technical/.test(h.textContent);})[0];
-  if(techCol){
-    var hint=document.createElement('p');hint.className='cred-hint';hint.textContent='Click a skill to see where I used it';
-    techCol.querySelector('h3').insertAdjacentElement('afterend',hint);
-    var active=null;
-    techCol.querySelectorAll('li').forEach(function(li){
-      var kv=li.querySelector('.kv');if(!kv)return;
-      var panel=document.createElement('div');panel.className='used-in';panel.setAttribute('aria-live','polite');
-      var parts=kv.textContent.split(' · ');kv.textContent='';
-      parts.forEach(function(p,i){
-        if(i)kv.appendChild(document.createTextNode(' · '));
-        var ids=used[p.trim()];
-        if(!ids){kv.appendChild(document.createTextNode(p));return;}
-        var b=document.createElement('button');b.type='button';b.className='skill-btn';b.textContent=p;b.setAttribute('aria-pressed','false');
-        b.addEventListener('click',function(){
-          var same=active===b;
-          if(active){active.setAttribute('aria-pressed','false');active._panel.classList.remove('show');}
-          if(same){active=null;return;}
-          active=b;b._panel=panel;b.setAttribute('aria-pressed','true');
-          panel.innerHTML='Used in: ';
-          ids.forEach(function(id){var t=document.getElementById(id);if(!t)return;
-            var a=document.createElement('a');a.href='#'+id;a.textContent=(t.dataset.name||id)+' →';
-            a.addEventListener('click',function(e){e.preventDefault();
-              if(t.classList.contains('filtered-out')){var allBtn=document.querySelector('.fbtn[data-f="all"]');if(allBtn)allBtn.click();}
-              go(id);});
-            panel.appendChild(a);});
-          panel.classList.add('show');
-        });
-        kv.appendChild(b);
-      });
-      li.appendChild(panel);
-    });
-  }
-})();
-
-// Scroll reveal
-(function(){
-  var els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    els.forEach(function(e){ e.classList.add('in'); });
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { rootMargin: '0px 0px -60px 0px', threshold: .08 });
-  els.forEach(function(e){ io.observe(e); });
-})();
-</script>
-<script>
-/* ---------- v5: dark mode, labs, copy email ---------- */
-(function(){
-  var root=document.documentElement;
-  function $(s){return document.querySelector(s);}
-  function toast(m){var t=$('#toast');if(!t)return;t.textContent=m;t.classList.add('show');clearTimeout(toast.k);toast.k=setTimeout(function(){t.classList.remove('show');},1800);}
-
-  // dark mode
-  var tb=$('#themeBtn');
-  function sync(){var d=root.getAttribute('data-theme')==='dark';tb.textContent=d?'light':'dark';tb.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
-  if(tb){sync();tb.addEventListener('click',function(){var d=root.getAttribute('data-theme')!=='dark';
-    if(d)root.setAttribute('data-theme','dark');else root.removeAttribute('data-theme');
-    try{localStorage.setItem('theme',d?'dark':'light');}catch(e){}sync();});}
-
-  // Canary: Shannon entropy of the bytes, the same signal the tool uses
-  (function(){var ta=$('#entText');if(!ta)return;
-    var fill=document.querySelector('[data-lab="entropy"] .fill'),num=$('#entNum'),ver=$('#entVerdict'),note=$('#entNote'),orig=ta.value;
-    function H(b){if(!b.length)return 0;var c=new Array(256).fill(0);for(var i=0;i<b.length;i++)c[b[i]]++;var h=0;for(var j=0;j<256;j++)if(c[j]){var p=c[j]/b.length;h-=p*Math.log2(p);}return h;}
-    function show(h){var hot=h>=7.5;num.textContent=h.toFixed(2);fill.style.width=(h/8*100)+'%';fill.classList.toggle('hot',hot);
-      ver.textContent=hot?'fail':'pass';ver.classList.toggle('bad',hot);
-      note.textContent=hot?'— looks encrypted; Canary would alert':(h>=6?'— unusually random for a document':'— looks like normal data');}
-    function fromText(){ta.readOnly=false;show(H(new TextEncoder().encode(ta.value)));}
-    ta.addEventListener('input',fromText);
-    $('#entEncrypt').addEventListener('click',function(){var n=Math.max(4096,ta.value.length);var c=new Uint8Array(n);crypto.getRandomValues(c);
-      var s='';for(var i=0;i<96;i++)s+=c[i].toString(16).padStart(2,'0')+(i%2?' ':'');ta.value=s+'…';ta.readOnly=true;show(H(c));});
-    $('#entReset').addEventListener('click',function(){ta.value=orig;fromText();});
-    fromText();})();
-
-  // Credential Leak Scanner: the same rules + entropy filter as the CLI, run in the browser
-  (function(){var ta=$('#secText');if(!ta)return;
-    var cnt=$('#secCount'),ver=$('#secVerdict'),note=$('#secNote'),list=$('#secList');
-    function rnd(n,a){var c=new Uint32Array(n);crypto.getRandomValues(c);var s='';for(var i=0;i<n;i++)s+=a[c[i]%a.length];return s;}
-    var AN='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',UP='ABCDEFGHIJKLMNOPQRSTUVWXYZ0234567';
-    var base='DEBUG = True\nDATABASE_URL = os.environ["DATABASE_URL"]\nAPI_KEY = "your-api-key-here"\nTIMEOUT = 30';
-    var leaks=[function(){return 'AWS_ACCESS_KEY_ID = "'+'AK'+'IA'+rnd(16,UP)+'"';},
-               function(){return 'GITHUB_TOKEN = "'+'gh'+'p_'+rnd(36,AN)+'"';},
-               function(){return 'STRIPE_KEY = "'+'sk'+'_live_'+rnd(24,AN)+'"';},
-               function(){return 'DB = "postgres://admin:'+rnd(14,AN)+'@db.internal/app"';}],li=0; // credscan: ignore (demo generator)
-    var rules=[['AWS access key ID','high',/\b((?:AKIA|ASIA)[0-9A-Z]{16})\b/g,3],
-      ['GitHub token','high',/\b(gh[pousr]_[A-Za-z0-9]{36,255})\b/g,3.5],
-      ['Slack token','high',/\b(xox[abposr]-[A-Za-z0-9-]{10,72})\b/g,3],
-      ['Stripe secret key','high',/\b((?:sk|rk)_live_[A-Za-z0-9]{20,99})\b/g,3.5],
-      ['Google API key','high',/\b(AIza[0-9A-Za-z_\-]{35})\b/g,3.5],
-      ['Private key','high',/(-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)/g,0],
-      ['Password in connection string','high',/\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis):\/\/[^:\s\/]+:([^@\s\/]{6,})@/g,3],
-      ['Hard-coded secret','medium',/\b(?:password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret)\b\s*[:=]\s*['"]([^'"\s]{8,})['"]/gi,3.5]];
-    var hints=['example','sample','dummy','placeholder','changeme','your_','your-','<','xxxx','${','{','environ','getenv'];
-    function H(s){var m={},h=0;for(var i=0;i<s.length;i++)m[s[i]]=(m[s[i]]||0)+1;for(var k in m){var p=m[k]/s.length;h-=p*Math.log2(p);}return h;}
-    function red(s){return s.length<=8?'*'.repeat(s.length):s.slice(0,4)+'*'.repeat(Math.min(s.length-8,24))+s.slice(-4);}
-    function scan(){var out=[];ta.value.split('\n').forEach(function(line,n){var seen={};
-        rules.forEach(function(r){r[2].lastIndex=0;var m;while((m=r[2].exec(line))){var s=m[1];if(seen[s])continue;var e=H(s);
-          if(r[3]&&e<r[3])continue;if(r[0]!=='Private key'&&hints.some(function(h){return s.toLowerCase().indexOf(h)>=0;}))continue;
-          seen[s]=1;out.push({d:r[0],sev:r[1],line:n+1,m:red(s),e:e});}});});
-      cnt.textContent=out.length;var bad=out.length>0;ver.textContent=bad?'fail':'pass';ver.classList.toggle('bad',bad);
-      note.textContent=bad?'— commit blocked (exit code 1)':'— placeholders and env vars are ignored';
-      list.innerHTML='';out.forEach(function(f){var li=document.createElement('li');
-        li.innerHTML='<b>'+f.sev.toUpperCase()+'</b> '+f.d+' · line '+f.line+'<br><span class="m">match: '+f.m+'  entropy: '+f.e.toFixed(2)+'</span>';list.appendChild(li);});}
-    ta.addEventListener('input',scan);
-    $('#secLeak').addEventListener('click',function(){ta.value=ta.value.replace(/\s*$/,'')+'\n'+leaks[li++%leaks.length]();scan();});
-    $('#secPlace').addEventListener('click',function(){ta.value=ta.value.replace(/\s*$/,'')+'\nPASSWORD = "changeme123"';scan();});
-    $('#secReset').addEventListener('click',function(){ta.value=base;li=0;scan();});
-    ta.value=base;scan();})();
-
-  // Phishing Risk Analyzer: flip a verdict, watch the risk score respond
-  (function(){var box=document.querySelector('[data-lab="mail"]');if(!box)return;
-    var score=$('#mailScore'),ver=$('#mailVerdict'),why=$('#mailWhy'),bar=$('#mailBar'),from=$('#mailFrom');
-    var btns=[].slice.call(box.querySelectorAll('.vtog'));
-    function on(k){return box.querySelector('[data-k="'+k+'"]').getAttribute('aria-pressed')==='true';}
-    function render(){var s=0,r=[];
-      if(!on('spf')){s+=25;r.push('SPF failed');}if(!on('dkim')){s+=30;r.push('DKIM failed');}if(!on('dmarc')){s+=25;r.push('DMARC failed');}
-      var look=on('look');if(look){s+=35;r.push('the domain imitates a real bank');}
-      var homo=on('homo');if(homo){s+=40;r.push('a Cyrillic \u043e is posing as an o, so the authentication checks pass for the fake domain');}
-      var disp=on('disp');if(disp){s+=25;r.push('the display name says Northbank but the address is on another domain');}
-      var att=on('att');if(att){s+=40;r.push('the attachment is a program dressed up as a PDF');}s=Math.min(100,s);
-      btns.forEach(function(b){var k=b.dataset.k,p=b.getAttribute('aria-pressed')==='true';
-        if(k==='look'||k==='homo'||k==='disp'||k==='att'){b.textContent=p?'yes':'no';b.classList.toggle('bad',p);}else{b.textContent=p?'pass':'fail';b.classList.toggle('bad',!p);}});
-      var addr=look?'billing@n0rthbank-secure.com':(homo?'billing@n\u043erthbank.com':(disp?'alerts@nb-mailer77.net':'billing@northbank.com'));
-      from.textContent=disp?'Northbank Billing <'+addr+'>':addr;
-      var at=document.getElementById('mailAttach');if(at)at.textContent=att?'statement.pdf.exe':'statement.pdf';
-      score.textContent=s;bar.style.width=s+'%';bar.classList.toggle('hot',s>=30);
-      ver.textContent=s>=60?'high':(s>=30?'suspicious':'low');ver.classList.toggle('bad',s>=30);
-      why.textContent=r.length?'— '+(r.length>1?r.slice(0,-1).join(', ')+' and '+r[r.length-1]:r[0]):'— every check passed';}
-    btns.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');render();});});
-    render();})();
-
-  // copy email
-  var cb=$('#copyEmail');
-  if(cb)cb.addEventListener('click',function(){var a='akshithreddysheri@gmail.com';
-    function done(){toast('Email copied: '+a);}
-    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(a).then(done,done);else done();});
-})();
-</script>
-<script>
-/* ---------- v7: meal planner, re-run checks, quick jump, back to top ---------- */
-(function(){
-  function $(s){return document.querySelector(s);}
-  function $$(s){return [].slice.call(document.querySelectorAll(s));}
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // KitchenSense: allergies remove recipes (hard filter); preferences only reorder (soft rank)
-  (function(){var list=$('#mealList');if(!list)return;
-    var recipes=[
-      {n:'Chicken stir-fry',a:[],veg:0,quick:1,spicy:1,base:5},
-      {n:'Mac and cheese',a:['dairy','gluten'],veg:1,quick:1,spicy:0,base:6},
-      {n:'Peanut noodles',a:['peanuts','gluten'],veg:1,quick:1,spicy:1,base:7},
-      {n:'Black bean tacos',a:[],veg:1,quick:1,spicy:1,base:4},
-      {n:'Salmon and rice',a:[],veg:0,quick:0,spicy:0,base:5},
-      {n:'Veggie lasagna',a:['dairy','gluten'],veg:1,quick:0,spicy:0,base:3}];
-    var out=$('#mealOut'),last=[];
-    function on(sel){return $$(sel+' .vtog[aria-pressed="true"]').map(function(b){return b.dataset.a||b.dataset.p;});}
-    function render(){var al=on('#allergyPick'),pr=on('#prefPick');
-      var keep=[],gone=[];
-      recipes.forEach(function(r){var hit=r.a.filter(function(x){return al.indexOf(x)>=0;});
-        if(hit.length)gone.push({r:r,why:'contains '+hit.join(' + ')});
-        else{var s=r.base;pr.forEach(function(p){if(r[p])s+=4;});keep.push({r:r,s:s});}});
-      keep.sort(function(x,y){return y.s-x.s;});
-      list.innerHTML='';
-      keep.forEach(function(k,i){var li=document.createElement('li');
-        var tags=[];if(k.r.veg)tags.push('veg');if(k.r.quick)tags.push('quick');if(k.r.spicy)tags.push('spicy');
-        li.innerHTML='<span class="nm"></span><span class="tg"></span>';li.firstChild.textContent=k.r.n;li.lastChild.textContent=tags.join(' · ')||'—';
-        if(last.length&&last.indexOf(k.r.n)!==i&&!reduce)li.classList.add('moved');list.appendChild(li);});
-      gone.forEach(function(g){var li=document.createElement('li');li.className='out';
-        li.innerHTML='<span class="nm"></span><span class="tg"></span>';li.firstChild.textContent=g.r.n;li.lastChild.textContent='removed · '+g.why;list.appendChild(li);});
-      last=keep.map(function(k){return k.r.n;});
-      out.textContent=keep.length+' of '+recipes.length+' recipes safe to cook'+(gone.length?' · '+gone.length+' removed by allergy filter':'')+(pr.length?' · ranked by your preferences':'');}
-    $$('#allergyPick .vtog, #prefPick .vtog').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');render();});});
-    render();})();
-
-  // re-run the Authentication-Results checks
-  (function(){var b=$('#rerun');if(!b)return;
-    b.addEventListener('click',function(){var vs=$$('[data-verdict]');
-      vs.forEach(function(v){v.textContent='····';v.classList.add('pending');});
-      vs.forEach(function(v,i){setTimeout(function(){v.textContent='pass';v.classList.remove('pending');},reduce?0:300+i*280);});});})();
-
-  // back to top
-  (function(){var b=$('#toTop');if(!b)return;
-    window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>900);},{passive:true});
-    b.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});})();
-
-  // quick jump: press "/" (or click "/ jump") to search sections, projects, and roles
-  (function(){var box=$('#jump'),inp=$('#jumpInput'),ul=$('#jumpList');if(!box)return;
-    var items=[];
-    $$('section[id]').forEach(function(s){var l=s.querySelector('.sect-label');if(l)items.push({t:l.childNodes[0].textContent.trim(),k:'section',el:s});});
-    $$('.project[id]').forEach(function(p){items.push({t:p.dataset.name||p.id,k:'project',el:p});});
-    $$('.role[id]').forEach(function(r){var tt=r.querySelector('.role-title');items.push({t:(tt?tt.textContent:'').trim()+' · '+(r.dataset.name||''),k:'experience',el:r});});
-    var shown=[],sel=0;
-    function draw(){var q=inp.value.toLowerCase().trim();shown=items.filter(function(i){return !q||i.t.toLowerCase().indexOf(q)>=0||i.k.indexOf(q)===0;});
-      sel=Math.min(sel,Math.max(0,shown.length-1));ul.innerHTML='';
-      shown.forEach(function(i,n){var li=document.createElement('li');li.setAttribute('role','option');li.setAttribute('aria-selected',n===sel?'true':'false');
-        li.textContent=i.t;var sp=document.createElement('span');sp.textContent=i.k;li.appendChild(sp);
-        li.addEventListener('click',function(){go(i);});ul.appendChild(li);});
-      if(!shown.length){var li=document.createElement('li');li.textContent='No matches';ul.appendChild(li);}}
-    function go(i){close();var col=i.el.querySelector&&i.el.closest('.collapsible');
-      i.el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}
-    function open(){box.classList.add('open');inp.value='';sel=0;draw();setTimeout(function(){inp.focus();},20);}
-    function close(){box.classList.remove('open');}
-    var jb=$('#jumpBtn');if(jb)jb.addEventListener('click',open);
-    box.addEventListener('click',function(e){if(e.target===box)close();});
-    inp.addEventListener('input',function(){sel=0;draw();});
-    inp.addEventListener('keydown',function(e){
-      if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,shown.length-1);draw();}
-      else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);draw();}
-      else if(e.key==='Enter'){e.preventDefault();if(shown[sel])go(shown[sel]);}
-      else if(e.key==='Escape'){close();}});
-    document.addEventListener('keydown',function(e){var typing=/input|textarea|select/i.test(e.target.tagName||'');
-      if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){e.preventDefault();box.classList.contains('open')?close():open();}
-      else if(!typing&&e.key==='/'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();open();}
-      else if(e.key==='Escape'&&box.classList.contains('open'))close();});})();
-})();
-</script>
-<script>
-/* ---------- v8: Canary decoy demo, stat counters ---------- */
-(function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function $(s){return document.querySelector(s);}
-
-  // Canary decoys: a folder walker encrypts files in name order. With decoys
-  // planted, it reaches a "!_" file first; one encrypted decoy scores 50+25
-  // (CRITICAL) by itself, the same rule as detect.py signal 7. Without them,
-  // only the entropy signal fires (3+ files: 25 points, SUSPICIOUS) and every
-  // file is gone before anything looks critical.
-  (function(){var ul=$('#decoyFiles');if(!ul)return;
-    var tog=$('#decoyToggle'),run=$('#decoyRun'),rst=$('#decoyReset'),sc=$('#decoyScore'),vd=$('#decoyVerdict'),note=$('#decoyNote');
-    var real=['budget.txt','essay_draft.txt','lease.txt','notes.txt','recipes.txt','resume.txt','taxes_2025.txt'];
-    var decoys=['!_Bank_statements_2026.txt','!_Passwords_backup.txt'];
-    var timer=null,files=[];
-    function label(n){return n>=70?'critical':n>=40?'high':n>=20?'suspicious':'normal';}
-    function build(){clearTimeout(timer);timer=null;run.disabled=false;
-      var planted=tog.getAttribute('aria-pressed')==='true';
-      tog.textContent=planted?'decoys planted':'no decoys';
-      files=(planted?decoys:[]).concat(real).sort().map(function(n){return {n:n,decoy:n.indexOf('!_')===0,enc:false};});
-      ul.innerHTML='';files.forEach(function(f){var li=document.createElement('li');li.className=f.decoy?'decoy':'';
-        li.innerHTML='<span class="nm"></span><span class="st"></span>';li.firstChild.textContent=f.n;li.lastChild.textContent=f.decoy?'decoy':'ok';f.el=li;ul.appendChild(li);});
-      show(0,planted?'two decoys sort first, before your real files':'only real files: Canary has to wait for the damage to add up');}
-    function show(n,msg){sc.textContent=n;var l=label(n);vd.textContent=l;vd.classList.toggle('bad',n>=20);note.textContent=msg?'— '+msg:'';}
-    function score(){var encReal=files.filter(function(f){return f.enc&&!f.decoy;}).length,n=0;
-      if(encReal>=10)n+=40;else if(encReal>=3)n+=25;
-      if(files.some(function(f){return f.enc&&f.decoy;}))n+=75;return Math.min(100,n);}
-    function step(i){
-      if(i>=files.length){var n=score();show(n,'all '+real.length+' real files encrypted; too few for the volume signals to say CRITICAL');run.disabled=false;return;}
-      var f=files[i];f.enc=true;f.el.classList.add('enc');f.el.lastChild.textContent='encrypted';
-      var n=score();
-      if(n>=70){f.el.classList.add('trip');
-        var safe=files.filter(function(x){return !x.enc&&!x.decoy;}).length;
-        show(n,'decoy touched after '+(i+1)+' file. '+safe+' of '+real.length+' real files untouched (demo checks after every file; the CLI checks every --interval)');
-        run.disabled=false;return;}
-      show(n,'encrypting '+f.n+'…');
-      timer=setTimeout(function(){step(i+1);},reduce?0:420);}
-    run.addEventListener('click',function(){build();run.disabled=true;step(0);});
-    rst.addEventListener('click',build);
-    tog.addEventListener('click',function(){tog.setAttribute('aria-pressed',tog.getAttribute('aria-pressed')==='true'?'false':'true');build();});
-    build();})();
-
-  // stat tiles count up once when they scroll into view
-  (function(){var els=[].slice.call(document.querySelectorAll('.stat b[data-count]'));
-    if(reduce||!els.length||!('IntersectionObserver' in window))return;
-    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;io.unobserve(en.target);
-      var b=en.target,to=+b.dataset.count,t0=performance.now();
-      (function tick(t){var p=Math.min(1,(t-t0)/900);b.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick);})(t0);});},{threshold:.6});
-    els.forEach(function(b){io.observe(b);});})();
-})();
-</script>
+<script src="js/checks.js"></script>
+<script src="js/labs.js"></script>
+<script src="js/planner.js"></script>
+<script src="js/decoy.js"></script>
 </body>
 </html>

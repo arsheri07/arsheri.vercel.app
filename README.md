@@ -29,7 +29,11 @@ Also: dark mode, a command palette (`/` or Ctrl/Cmd+K), project filters, and a s
 
 ## Stack
 
-One static `index.html` with inline CSS and vanilla JavaScript, plus `images/`. No framework, no build step, no tracking. Fonts: IBM Plex Mono and IBM Plex Sans.
+One static `index.html` with inline CSS, vanilla JavaScript in `js/` (no inline scripts or event handlers), plus `images/`. No framework, no build step, no tracking. Fonts: IBM Plex Mono and IBM Plex Sans.
+
+## Security headers
+
+`vercel.json` sends a strict Content-Security-Policy (`script-src 'self'`, `default-src 'none'`, no framing, no form posts), plus `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and `Cross-Origin-Opener-Policy`. Because scripts may only come from this site, **don't add inline `<script>` blocks or `onclick=`-style attributes**: put code in `js/` and attach listeners there. (Inline `<style>` is still allowed.) A new third-party embed needs its host added to the matching directive.
 
 ## Deploy
 
